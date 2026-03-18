@@ -5,33 +5,62 @@ import DashboardMockupMobile from "@/components/DashboardMockupMobile";
 import DashboardMockupMobileAgent from "@/components/DashboardMockupMobileAgent";
 import DashboardMockupMobileTour from "@/components/DashboardMockupMobileTour";
 
-// ── Device constants ──────────────────────────────────────────────────────────
-//
-// Phone: 9:19.5 — industry standard (matches iPhone 14/15, Pixel 8, Galaxy S24)
-// Tablet: 4:3 landscape (iPad standard) — always wider than tall
-//
-// The ScaledScreen trick:
-//   Dashboard renders at a fixed LOGICAL size (e.g. 1200×900 for tablet),
-//   then a CSS transform: scale() shrinks it to fit the bezel pixel-perfectly.
-//   This means all px font sizes, spacing, etc. stay proportionally correct
-//   at every viewport width — no microscopic text at small sizes.
-
-const PHONE_ASPECT  = 19.5 / 9;   // height = width * this  (portrait)
-const TABLET_ASPECT = 3 / 4;      // height = width * this  (landscape 4:3)
-
-// Logical render dimensions — dashboard is designed for these sizes
+// ── Device logical dimensions ─────────────────────────────────────────────────
+// Phone: 9:19.5 portrait | Tablet: 4:3 landscape
+// ScaledScreen renders at these sizes then CSS-scales to fit the bezel.
 const TABLET_LOGICAL_W = 1200;
 const TABLET_LOGICAL_H = 900;
-const PHONE_LOGICAL_W  = 280;   // mobile dashboards designed for ~280px natural width
-const PHONE_LOGICAL_H  = 607;   // maintains 9:19.5 ratio (280 * 19.5/9 ≈ 607)
+const PHONE_LOGICAL_W  = 280;
+const PHONE_LOGICAL_H  = 607;   // 280 × (19.5/9) ≈ 607
 
 const BEZEL_COLOR = "#5a5a5a";
 const BEZEL_BG    = "#1a1a1a";
 const SHADOW      = "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a";
 
+// ── useDeviceSize ─────────────────────────────────────────────────────────────
+// Returns a sizing object derived from current viewport width.
+// All bezel values scale proportionally so they look correct on any screen.
+function useDeviceSize() {
+  const [vw, setVw] = React.useState(1280);
+  React.useEffect(() => {
+    const update = () => setVw(window.innerWidth);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const isMobile = vw < 640;
+
+  // Phone bezel values — scale with viewport
+  // Reference: at 390px vw the phone bezel is ~300px wide → ratio ≈ 0.77
+  // At 1280px vw the phone column is ~24% ≈ 307px → similar absolute size
+  // We want bezel chrome to be ~4-5% of device width
+  const phonePct = isMobile ? Math.round(vw * 0.77) : Math.round(vw * 0.24 * 0.96);
+  const pBorder  = Math.max(2, Math.round(phonePct * 0.016));   // ~1.6% of device width
+  const pPad     = Math.max(3, Math.round(phonePct * 0.020));
+  const pRadius  = Math.max(18, Math.round(phonePct * 0.115));  // ~11.5% → nice pill
+  const pScreenR = Math.max(12, Math.round(phonePct * 0.082));
+  const pEarW    = Math.max(20, Math.round(phonePct * 0.115));
+  const pEarH    = Math.max(3,  Math.round(phonePct * 0.014));
+  const pHomeW   = Math.max(22, Math.round(phonePct * 0.125));
+  const pHomeH   = pEarH;
+
+  // Tablet bezel values — tablet column is ~68% of container (maxWidth 64rem = 1024px on desktop)
+  const tabletPct = isMobile ? 0 : Math.round(Math.min(vw, 1024) * 0.68 * 0.96);
+  const tBorder   = Math.max(3, Math.round(tabletPct * 0.008));
+  const tPad      = Math.max(4, Math.round(tabletPct * 0.010));
+  const tRadius   = Math.max(14, Math.round(tabletPct * 0.026));
+  const tScreenR  = Math.max(8,  Math.round(tabletPct * 0.016));
+  const tDotSize  = Math.max(4,  Math.round(tabletPct * 0.008));
+  const tHomeW    = Math.max(24, Math.round(tabletPct * 0.050));
+  const tHomeH    = Math.max(2,  Math.round(tabletPct * 0.004));
+
+  return { isMobile, pBorder, pPad, pRadius, pScreenR, pEarW, pEarH, pHomeW, pHomeH, tBorder, tPad, tRadius, tScreenR, tDotSize, tHomeW, tHomeH, phonePct }
+}
+
 // ── ScaledScreen ─────────────────────────────────────────────────────────────
-// Renders children at logicalW × logicalH then CSS-scales to fit the container.
-// ResizeObserver recalculates scale whenever the bezel changes size.
+// Renders children at logicalW × logicalH then CSS-scales to fit.
+// ResizeObserver recalculates whenever bezel changes size.
 function ScaledScreen({
   logicalW, logicalH, borderRadius, children
 }: {
@@ -64,7 +93,6 @@ function ScaledScreen({
       style={{
         position: "relative",
         width: "100%",
-        // Enforce aspect ratio via padding-bottom trick
         paddingBottom: `${(logicalH / logicalW) * 100}%`,
         overflow: "hidden",
         borderRadius,
@@ -101,13 +129,8 @@ export const ContainerScroll = ({
     offset: ["start end", "end start"],
   });
 
-  const [isMobile, setIsMobile] = React.useState(false);
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+  const sz = useDeviceSize();
+  const { isMobile } = sz;
 
   const rotate    = useTransform(scrollYProgress, [0, 0.55], [14, 0]);
   const scale     = useTransform(scrollYProgress, [0, 0.55], [isMobile ? 0.88 : 0.96, 1]);
@@ -120,12 +143,44 @@ export const ContainerScroll = ({
     ? DashboardMockupMobileTour
     : DashboardMockupMobile;
 
+  // Phone bezel — shared across mobile-only and desktop phone column
+  const PhoneBezel = ({ width }: { width?: string }) => (
+    <div style={{ margin: "0 auto", maxWidth: width }}>
+      <div style={{
+        border: `${sz.pBorder}px solid ${BEZEL_COLOR}`,
+        padding: `${sz.pPad}px`,
+        backgroundColor: BEZEL_BG,
+        borderRadius: sz.pRadius,
+        boxShadow: SHADOW,
+      }}>
+        {/* Earpiece pill */}
+        <div style={{
+          width: sz.pEarW, height: sz.pEarH, borderRadius: 9999,
+          background: "#3a3a3a", margin: `${sz.pPad}px auto ${sz.pPad + 1}px`,
+        }} />
+        <ScaledScreen logicalW={PHONE_LOGICAL_W} logicalH={PHONE_LOGICAL_H} borderRadius={sz.pScreenR}>
+          <MobileContent />
+        </ScaledScreen>
+        {/* Home indicator */}
+        <div style={{
+          width: sz.pHomeW, height: sz.pHomeH, borderRadius: 9999,
+          background: "#3a3a3a", margin: `${sz.pPad + 1}px auto ${sz.pPad}px`,
+        }} />
+      </div>
+      <p style={{
+        textAlign: "center", marginTop: Math.max(6, sz.pBorder * 2),
+        fontSize: Math.max(9, Math.round(sz.phonePct * 0.038)),
+        color: "var(--ds-text-3)", fontWeight: 500,
+        letterSpacing: "0.05em", textTransform: "uppercase",
+      }}>Mobile</p>
+    </div>
+  )
+
   return (
     <div
       ref={containerRef}
       style={{
         height: isMobile ? "auto" : "64rem",
-        minHeight: isMobile ? "unset" : undefined,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -149,132 +204,57 @@ export const ContainerScroll = ({
           {titleComponent}
         </motion.div>
 
-        {/* ── MOBILE VIEWPORT: phone only, big and prominent ── */}
+        {/* ── MOBILE: phone only, prominent ── */}
         {isMobile ? (
-          <motion.div
-            style={{
-              rotateX: rotate,
-              scale,
-              opacity,
-              transformOrigin: "center top",
-              margin: "0 auto",
-              maxWidth: "300px",   // phone fills ~77% of 390px viewport
-            }}
-          >
-            {/* Phone bezel */}
-            <div style={{
-              border: `4px solid ${BEZEL_COLOR}`,
-              padding: "5px",
-              backgroundColor: BEZEL_BG,
-              borderRadius: "36px",
-              boxShadow: SHADOW,
-            }}>
-              {/* Earpiece */}
-              <div style={{
-                width: 32, height: 4, borderRadius: 9999,
-                background: "#3a3a3a", margin: "4px auto 5px",
-              }} />
-              {/* Screen — 9:19.5, content scales to fit */}
-              <ScaledScreen
-                logicalW={PHONE_LOGICAL_W}
-                logicalH={PHONE_LOGICAL_H}
-                borderRadius={24}
-              >
-                <MobileContent />
-              </ScaledScreen>
-              {/* Home indicator */}
-              <div style={{
-                width: 36, height: 4, borderRadius: 9999,
-                background: "#3a3a3a", margin: "5px auto 3px",
-              }} />
-            </div>
-            <p style={{
-              textAlign: "center", marginTop: 10,
-              fontSize: 11, color: "var(--ds-text-3)",
-              fontWeight: 500, letterSpacing: "0.05em",
-              textTransform: "uppercase",
-            }}>Mobile</p>
+          <motion.div style={{ rotateX: rotate, scale, opacity, transformOrigin: "center top" }}>
+            <PhoneBezel width="300px" />
           </motion.div>
+
         ) : (
-          /* ── DESKTOP VIEWPORT: tablet + phone side by side ── */
+          /* ── DESKTOP: tablet + phone side by side ── */
           <motion.div
             style={{
-              rotateX: rotate,
-              scale,
-              opacity,
+              rotateX: rotate, scale, opacity,
               transformOrigin: "center top",
-              maxWidth: "64rem",
-              margin: "0 auto",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "center",
-              gap: "28px",
+              maxWidth: "64rem", margin: "0 auto",
+              display: "flex", alignItems: "flex-end",
+              justifyContent: "center", gap: "28px",
             }}
           >
             {/* ── TABLET — landscape 4:3 ── */}
             <div style={{ flex: "0 0 68%", minWidth: 0 }}>
               <div style={{
-                border: `5px solid ${BEZEL_COLOR}`,
-                padding: "7px",
+                border: `${sz.tBorder}px solid ${BEZEL_COLOR}`,
+                padding: `${sz.tPad}px`,
                 backgroundColor: BEZEL_BG,
-                borderRadius: "20px",
+                borderRadius: sz.tRadius,
                 boxShadow: SHADOW,
               }}>
+                {/* Front camera dot */}
                 <div style={{
-                  width: 6, height: 6, borderRadius: "50%",
-                  background: "#3a3a3a", margin: "0 auto 4px",
+                  width: sz.tDotSize, height: sz.tDotSize, borderRadius: "50%",
+                  background: "#3a3a3a", margin: `0 auto ${sz.tPad - 2}px`,
                 }} />
-                <ScaledScreen
-                  logicalW={TABLET_LOGICAL_W}
-                  logicalH={TABLET_LOGICAL_H}
-                  borderRadius={12}
-                >
+                <ScaledScreen logicalW={TABLET_LOGICAL_W} logicalH={TABLET_LOGICAL_H} borderRadius={sz.tScreenR}>
                   {children}
                 </ScaledScreen>
+                {/* Home bar */}
                 <div style={{
-                  width: 36, height: 3, borderRadius: 9999,
-                  background: "#3a3a3a", margin: "4px auto 0",
+                  width: sz.tHomeW, height: sz.tHomeH, borderRadius: 9999,
+                  background: "#3a3a3a", margin: `${sz.tPad - 2}px auto 0`,
                 }} />
               </div>
               <p style={{
-                textAlign: "center", marginTop: 8,
-                fontSize: 11, color: "var(--ds-text-3)",
-                fontWeight: 500, letterSpacing: "0.05em",
-                textTransform: "uppercase",
+                textAlign: "center", marginTop: Math.max(6, sz.tBorder * 2),
+                fontSize: Math.max(9, Math.round(sz.tBorder * 4)),
+                color: "var(--ds-text-3)", fontWeight: 500,
+                letterSpacing: "0.05em", textTransform: "uppercase",
               }}>Tablet</p>
             </div>
 
             {/* ── PHONE — portrait 9:19.5 ── */}
             <div style={{ flex: "0 0 24%", minWidth: 0, alignSelf: "flex-end" }}>
-              <div style={{
-                border: `4px solid ${BEZEL_COLOR}`,
-                padding: "5px",
-                backgroundColor: BEZEL_BG,
-                borderRadius: "28px",
-                boxShadow: SHADOW,
-              }}>
-                <div style={{
-                  width: 28, height: 4, borderRadius: 9999,
-                  background: "#3a3a3a", margin: "3px auto 4px",
-                }} />
-                <ScaledScreen
-                  logicalW={PHONE_LOGICAL_W}
-                  logicalH={PHONE_LOGICAL_H}
-                  borderRadius={18}
-                >
-                  <MobileContent />
-                </ScaledScreen>
-                <div style={{
-                  width: 32, height: 4, borderRadius: 9999,
-                  background: "#3a3a3a", margin: "4px auto 2px",
-                }} />
-              </div>
-              <p style={{
-                textAlign: "center", marginTop: 8,
-                fontSize: 11, color: "var(--ds-text-3)",
-                fontWeight: 500, letterSpacing: "0.05em",
-                textTransform: "uppercase",
-              }}>Mobile</p>
+              <PhoneBezel />
             </div>
           </motion.div>
         )}
