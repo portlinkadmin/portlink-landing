@@ -3,11 +3,45 @@ import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import DashboardMockupMobile from "@/components/DashboardMockupMobile";
 
-// Generic bezel styles — no brand identity, just a device outline
+// ── Device constants ──────────────────────────────────────────────────────────
+//
+// Phone: 9:19.5 — industry standard (matches iPhone 14/15, Pixel 8, Galaxy S24)
+//   width / height = 9 / 19.5  →  height = width * (19.5 / 9)
+//
+// Tablet: 4:3 landscape (iPad standard) — wider than it is tall
+//   width / height = 4 / 3  →  height = width * (3 / 4)
+//
+// These ratios are enforced with paddingBottom trick so they never deform.
+
+const PHONE_ASPECT  = 19.5 / 9;   // height = width * this
+const TABLET_ASPECT = 3 / 4;      // height = width * this  (landscape 4:3)
+
 const BEZEL_COLOR = "#5a5a5a";
 const BEZEL_BG    = "#1a1a1a";
 const SHADOW      = "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a";
 
+// ── Aspect-ratio box ──────────────────────────────────────────────────────────
+// paddingBottom = (h/w)*100% locks the intrinsic aspect ratio.
+// The inner div is absolutely positioned to fill it.
+function AspectBox({ ratio, children, borderRadius }: {
+  ratio: number
+  children: React.ReactNode
+  borderRadius: number
+}) {
+  return (
+    <div style={{ position: "relative", paddingBottom: `${ratio * 100}%`, width: "100%" }}>
+      <div style={{
+        position: "absolute", inset: 0,
+        overflow: "hidden",
+        borderRadius,
+      }}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+// ── ContainerScroll ───────────────────────────────────────────────────────────
 export const ContainerScroll = ({
   titleComponent,
   children,
@@ -34,11 +68,18 @@ export const ContainerScroll = ({
   const translate = useTransform(scrollYProgress, [0, 0.55], [0, -30]);
   const opacity   = useTransform(scrollYProgress, [0, 0.15], [0.5, 1]);
 
+  // Phone bezel padding (top earpiece + bottom indicator)
+  const phonePad = 5;    // px — inner padding inside bezel frame
+  const phoneBorder = 4; // px
+  const tabletPad = 7;
+  const tabletBorder = 5;
+
   return (
     <div
       ref={containerRef}
       style={{
-        height: isMobile ? "44rem" : "62rem",
+        // Container height drives how long the scroll animation lasts
+        height: isMobile ? "44rem" : "64rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -47,6 +88,7 @@ export const ContainerScroll = ({
       }}
     >
       <div style={{ width: "100%", position: "relative", perspective: "1200px" }}>
+
         {/* Title */}
         <motion.div
           style={{
@@ -60,7 +102,7 @@ export const ContainerScroll = ({
           {titleComponent}
         </motion.div>
 
-        {/* Devices row */}
+        {/* ── Devices row ── */}
         <motion.div
           style={{
             rotateX: rotate,
@@ -70,83 +112,83 @@ export const ContainerScroll = ({
             maxWidth: "64rem",
             margin: "0 auto",
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "flex-end",   // bottom-align so phone sits alongside tablet
             justifyContent: "center",
-            gap: isMobile ? "16px" : "24px",
+            gap: isMobile ? "12px" : "28px",
           }}
         >
-          {/* ── TABLET (left) ── */}
-          <div style={{ flex: "1 1 0", minWidth: 0 }}>
+          {/* ── TABLET — landscape 4:3 ── */}
+          <div style={{
+            // Tablet takes ~70% of available width, phone takes ~25%
+            flex: "0 0 68%",
+            minWidth: 0,
+          }}>
             <div style={{
-              border: `5px solid ${BEZEL_COLOR}`,
-              padding: "7px",
+              border: `${tabletBorder}px solid ${BEZEL_COLOR}`,
+              padding: `${tabletPad}px`,
               backgroundColor: BEZEL_BG,
-              borderRadius: "24px",
+              borderRadius: "20px",
               boxShadow: SHADOW,
             }}>
-              {/* Camera dot */}
+              {/* Front camera dot — centred on top edge */}
               <div style={{
                 width: 6, height: 6, borderRadius: "50%",
-                background: "#333", margin: "0 auto 5px",
+                background: "#3a3a3a", margin: "0 auto 4px",
               }} />
-              <div style={{
-                height: isMobile ? "18rem" : "28rem",
-                overflow: "hidden",
-                borderRadius: "14px",
-              }}>
+              {/* Screen — locked to 4:3 landscape */}
+              <AspectBox ratio={TABLET_ASPECT} borderRadius={12}>
                 {children}
-              </div>
-              {/* Home button bar */}
+              </AspectBox>
+              {/* Home-bar indicator */}
               <div style={{
-                width: 40, height: 4, borderRadius: 9999,
-                background: "#444", margin: "5px auto 0",
+                width: 36, height: 3, borderRadius: 9999,
+                background: "#3a3a3a", margin: "4px auto 0",
               }} />
             </div>
             <p style={{
-              textAlign: "center", marginTop: 10,
+              textAlign: "center", marginTop: 8,
               fontSize: 11, color: "var(--ds-text-3)",
-              fontWeight: 500, letterSpacing: "0.04em",
+              fontWeight: 500, letterSpacing: "0.05em",
+              textTransform: "uppercase",
             }}>Tablet</p>
           </div>
 
-          {/* ── PHONE (right) ── */}
+          {/* ── PHONE — portrait 9:19.5 ── */}
           <div style={{
-            flexShrink: 0,
-            width: isMobile ? "120px" : "180px",
-            // Align bottom of phone with bottom of tablet
+            flex: "0 0 24%",
+            minWidth: 0,
             alignSelf: "flex-end",
           }}>
             <div style={{
-              border: `4px solid ${BEZEL_COLOR}`,
-              padding: "5px",
+              border: `${phoneBorder}px solid ${BEZEL_COLOR}`,
+              padding: `${phonePad}px`,
               backgroundColor: BEZEL_BG,
               borderRadius: "28px",
               boxShadow: SHADOW,
             }}>
-              {/* Earpiece */}
+              {/* Earpiece pill */}
               <div style={{
                 width: 28, height: 4, borderRadius: 9999,
-                background: "#333", margin: "4px auto 5px",
+                background: "#3a3a3a", margin: "3px auto 4px",
               }} />
-              <div style={{
-                height: isMobile ? "22rem" : "34rem",
-                overflow: "hidden",
-                borderRadius: "20px",
-              }}>
+              {/* Screen — locked to 9:19.5 portrait */}
+              <AspectBox ratio={PHONE_ASPECT} borderRadius={18}>
                 <DashboardMockupMobile />
-              </div>
+              </AspectBox>
               {/* Home indicator */}
               <div style={{
-                width: 36, height: 4, borderRadius: 9999,
-                background: "#444", margin: "5px auto 2px",
+                width: 32, height: 4, borderRadius: 9999,
+                background: "#3a3a3a", margin: "4px auto 2px",
               }} />
             </div>
             <p style={{
-              textAlign: "center", marginTop: 10,
+              textAlign: "center", marginTop: 8,
               fontSize: 11, color: "var(--ds-text-3)",
-              fontWeight: 500, letterSpacing: "0.04em",
+              fontWeight: 500, letterSpacing: "0.05em",
+              textTransform: "uppercase",
             }}>Mobile</p>
           </div>
+
         </motion.div>
       </div>
     </div>
