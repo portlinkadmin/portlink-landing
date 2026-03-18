@@ -269,11 +269,11 @@ export default function WavesHero() {
       ctx.fillRect(0, 0, w, h)
 
       const waveConfigs: WaveConfig[] = [
-        { color: waveColors[0], opacity: 0.038, spotlightOpacity: 0.07, amplitude: 90,  frequency: 0.0028, offset: 0 },
-        { color: waveColors[1], opacity: 0.028, spotlightOpacity: 0.05, amplitude: 110, frequency: 0.0022, offset: Math.PI / 2 },
-        { color: waveColors[2], opacity: 0.024, spotlightOpacity: 0.04, amplitude: 75,  frequency: 0.0038, offset: Math.PI },
-        { color: waveColors[3], opacity: 0.044, spotlightOpacity: 0.08, amplitude: 100, frequency: 0.0018, offset: Math.PI * 1.5 },
-        { color: waveColors[4], opacity: 0.018, spotlightOpacity: 0.03, amplitude: 125, frequency: 0.0015, offset: Math.PI * 2 },
+        { color: waveColors[0], opacity: 0.11, spotlightOpacity: 0.07, amplitude: 90,  frequency: 0.0028, offset: 0 },
+        { color: waveColors[1], opacity: 0.08, spotlightOpacity: 0.05, amplitude: 110, frequency: 0.0022, offset: Math.PI / 2 },
+        { color: waveColors[2], opacity: 0.07, spotlightOpacity: 0.04, amplitude: 75,  frequency: 0.0038, offset: Math.PI },
+        { color: waveColors[3], opacity: 0.13, spotlightOpacity: 0.08, amplitude: 100, frequency: 0.0018, offset: Math.PI * 1.5 },
+        { color: waveColors[4], opacity: 0.05, spotlightOpacity: 0.03, amplitude: 125, frequency: 0.0015, offset: Math.PI * 2 },
       ]
 
       const mouse = mousePosRef.current
