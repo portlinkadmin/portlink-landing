@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import { useReveal } from '@/hooks/useReveal'
 import { ContainerScroll } from '@/components/ContainerScroll'
+import DashboardMockup from '@/components/DashboardMockup'
 import type { Persona } from '@/app/page'
 
 type RoleKey = 'cruise' | 'agent' | 'tour'
@@ -106,11 +107,7 @@ function RoleContent({ role }: { role: RoleKey }) {
           </div>
         }
       >
-        <img
-          src="/product-screenshot.png"
-          alt="Portlink Wheelhouse — Kanban board showing port call tasks across backlog, in progress, and done lanes"
-          className="w-full h-full object-cover object-top"
-        />
+        <DashboardMockup />
       </ContainerScroll>
 
       <ul
