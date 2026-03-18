@@ -1,6 +1,0 @@
-/* ============================================================
-   PORTLINK DESIGN SYSTEM V3 — Font Loading
-   Fonts: Plus Jakarta Sans (UI/body), Inter (fallback), JetBrains Mono (data/code)
-   font-display=optional: prevents invisible text AND layout shift (no FOUT)
-   ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=optional');

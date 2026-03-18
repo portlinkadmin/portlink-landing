@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=optional');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ===== Light theme (default :root) ===== */
+:root {
+  --ds-canvas:        #f7f9fc;
+  --ds-surface-1:     #ffffff;
+  --ds-surface-2:     #f4f7fa;
+  --ds-surface-3:     #e8edf4;
+  --ds-text-1:        #0b1220;
+  --ds-text-2:        #334155;
+  --ds-text-3:        #596b82;
+  --ds-border-1:      #dce4ed;
+
+  --wave-bg-start:    #e7f1f8;
+  --wave-bg-end:      #c9ddeb;
+  --wave-1:           #3d7daf;
+  --wave-2:           #295c85;
+  --wave-3:           #4a8fbf;
+  --wave-4:           #1e4a6e;
+  --wave-5:           #5ba3cc;
+  --ds-border-2:      #c5d1de;
+  --ds-primary:       #1a5e6b;
+  --ds-primary-hover: #2a8a9b;
+  --ds-primary-ink:   #ffffff;
+  --ds-accent:        #22d3ee;
+  --ds-accent-subtle: #ecfdff;
+  --ds-accent-strong: #06b6d4;
+  --ds-focus:         #1a5e6b;
+  --ds-focus-ring:    rgba(26, 94, 107, 0.18);
+  --ds-nav-glass:     rgba(247,249,252,0.85);
+  --ds-font-sans:     "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ===== Dark theme ===== */
+[data-theme="dark"] {
+  --ds-canvas:        #050d18;
+  --ds-surface-1:     #071220;
+  --ds-surface-2:     #0c1a2e;
+  --ds-surface-3:     #122340;
+  --ds-text-1:        #f0f4fa;
+  --ds-text-2:        #94a3b8;
+  --ds-text-3:        #7a8fa6;
+  --ds-border-1:      #1e2d42;
+  --wave-bg-start:    #050d18;
+  --wave-bg-end:      #091825;
+  --wave-1:           #3d7daf;
+  --wave-2:           #295c85;
+  --wave-3:           #4a8fbf;
+  --wave-4:           #1e4a6e;
+  --wave-5:           #5ba3cc;
+  --ds-border-2:      #2a3f5a;
+  --ds-primary:       #3d7daf;
+  --ds-primary-hover: #2d6a98;
+  --ds-primary-ink:   #ffffff;
+  --ds-accent:        #4a8fbf;
+  --ds-accent-subtle: #0d1f35;
+  --ds-accent-strong: #3d7daf;
+  --ds-focus:         #4a8fbf;
+  --ds-focus-ring:    rgba(61, 125, 175, 0.20);
+  --ds-nav-glass:     rgba(5,13,24,0.85);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+body {
+  font-family: var(--ds-font-sans);
+  background: var(--ds-canvas);
+  color: var(--ds-text-1);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ===== Logo filter by theme ===== */
+[data-theme="dark"] .logo-img { filter: brightness(0) invert(1); }
+[data-theme="light"] .logo-img,
+.logo-img { filter: none; }
+
+/* ===== Scroll reveal system ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal:nth-child(1) { transition-delay: 0s; }
+.reveal:nth-child(2) { transition-delay: .08s; }
+.reveal:nth-child(3) { transition-delay: .16s; }
+.reveal:nth-child(4) { transition-delay: .24s; }
+.reveal:nth-child(5) { transition-delay: .32s; }
+.reveal:nth-child(6) { transition-delay: .40s; }
+
+/* ── Persona Toggle responsive ── */
+.persona-label-short   { display: none; }
+.persona-label-full    { display: inline; }
+.persona-toggle-mobile { display: none; }
+.persona-toggle-desktop { display: flex; }
+
+@media (max-width: 1023px) {
+  .persona-label-full  { display: none; }
+  .persona-label-short { display: inline; }
+}
+
+@media (max-width: 639px) {
+  .persona-toggle-desktop { display: none !important; }
+  .persona-toggle-mobile  { display: block !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== Focus ring — global accessibility ===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ds-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===== Nav mobile ===== */
+@media (max-width: 768px) {
+  .nav-links-desktop { display: none !important; }
+  .nav-cta-desktop { display: none !important; }
+  .nav-hamburger { display: block !important; }
+}
+
+/* ===== Footer mobile ===== */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+/* ===== Role section mobile ===== */
+@media (max-width: 768px) {
+  .role-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ===== Pain + Value grids ===== */
+@media (max-width: 1024px) {
+  .pain-grid,
+  .value-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  .pain-grid,
+  .value-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ===== Pilot grid mobile ===== */
+@media (max-width: 600px) {
+  .pilot-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ===== Section padding mobile ===== */
+@media (max-width: 768px) {
+  .section-pad {
+    padding: 80px 16px !important;
+  }
+}
+
+/* ===== PersonaToggle mobile — icon only ===== */
+@media (max-width: 480px) {
+  .toggle-label {
+    display: none !important;
+  }
+}
