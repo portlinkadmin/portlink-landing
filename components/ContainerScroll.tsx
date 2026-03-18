@@ -2,6 +2,8 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import DashboardMockupMobile from "@/components/DashboardMockupMobile";
+import DashboardMockupMobileAgent from "@/components/DashboardMockupMobileAgent";
+import DashboardMockupMobileTour from "@/components/DashboardMockupMobileTour";
 
 // ── Device constants ──────────────────────────────────────────────────────────
 //
@@ -45,9 +47,11 @@ function AspectBox({ ratio, children, borderRadius }: {
 export const ContainerScroll = ({
   titleComponent,
   children,
+  role = 'cruise',
 }: {
   titleComponent: string | React.ReactNode;
   children: React.ReactNode;
+  role?: 'cruise' | 'agent' | 'tour';
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -173,7 +177,7 @@ export const ContainerScroll = ({
               }} />
               {/* Screen — locked to 9:19.5 portrait */}
               <AspectBox ratio={PHONE_ASPECT} borderRadius={18}>
-                <DashboardMockupMobile />
+                {role === 'agent' ? <DashboardMockupMobileAgent /> : role === 'tour' ? <DashboardMockupMobileTour /> : <DashboardMockupMobile />}
               </AspectBox>
               {/* Home indicator */}
               <div style={{
