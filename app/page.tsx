@@ -35,7 +35,7 @@ export default function Home() {
   const [gateVisible, setGateVisible] = useState(true)
   const [toggleVisible, setToggleVisible] = useState(false)
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)

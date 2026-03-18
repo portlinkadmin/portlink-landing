@@ -1,13 +1,13 @@
 'use client'
 
-import { Anchor, Compass } from 'lucide-react'
+import { Anchor, Compass, Ship, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import type { Persona } from '@/app/page'
 
 type RoleKey = 'cruise' | 'agent' | 'tour'
 
 interface PartnerCard {
-  icon: typeof Anchor
+  icon: typeof Anchor | typeof Ship | typeof Compass | typeof MapPin
   title: string
   body: string
 }
@@ -34,12 +34,12 @@ const ecosystemData: Record<RoleKey, { headline: string; desc: string; partners:
     desc: 'Portlink puts you in direct communication with cruise line operations teams — no more email chains.',
     partners: [
       {
-        icon: Anchor,
+        icon: Ship,
         title: 'Cruise Line Ops',
         body: 'Receive structured requirements directly. Confirm readiness, flag issues, and communicate changes through a single shared channel.',
       },
       {
-        icon: Compass,
+        icon: MapPin,
         title: 'Port Authorities',
         body: 'Coordinate berth bookings and port state control requirements with live status updates visible to all stakeholders.',
       },
@@ -50,12 +50,12 @@ const ecosystemData: Record<RoleKey, { headline: string; desc: string; partners:
     desc: 'See vessel arrivals, manage capacity, and receive bookings automatically — all synced to live cruise schedules.',
     partners: [
       {
-        icon: Anchor,
+        icon: Ship,
         title: 'Cruise Lines',
         body: 'Get discovered by cruise shore excursion managers. Receive booking requests, confirm availability, and manage changes in one place.',
       },
       {
-        icon: Compass,
+        icon: Anchor,
         title: 'Port Agents',
         body: 'Coordinate local logistics with port agents who are already on Portlink — no duplicate communication.',
       },

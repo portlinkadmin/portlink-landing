@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent, type FocusEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, ChevronRight, ChevronLeft, Ship, Anchor, Compass } from 'lucide-react'
+import { CheckCircle, ChevronRight, ChevronLeft, Ship, Anchor, Compass, Zap, Tag, HeadphonesIcon } from 'lucide-react'
 import { useReveal } from '@/hooks/useReveal'
 
 // ── Step definitions ──────────────────────────────────────────────────────────
@@ -72,9 +72,9 @@ const inputBase: React.CSSProperties = {
 // ── Pilot section (sits above the form) ───────────────────────────────────────
 
 const pilotPerks = [
-  { title: 'Early access', body: 'Be among the first fleets on the platform before public launch.' },
-  { title: 'Founding pricing', body: 'Lock in rates that will never be available again.' },
-  { title: 'White-glove onboarding', body: 'Dedicated setup with our team — not a help article.' },
+  { title: 'Early access',          body: 'Be among the first fleets on the platform before public launch.', icon: Zap },
+  { title: 'Founding pricing',      body: 'Lock in rates that will never be available again.',                icon: Tag },
+  { title: 'White-glove onboarding', body: 'Dedicated setup with our team — not a help article.',            icon: HeadphonesIcon },
 ]
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -153,25 +153,33 @@ export default function AccessSection() {
             gap: '20px',
             textAlign: 'left',
           }}>
-            {pilotPerks.map((perk) => (
-              <div key={perk.title} style={{
-                background: 'var(--ds-surface-2)',
-                border: '1px solid var(--ds-border-1)',
-                borderRadius: '14px',
-                padding: '24px 20px',
-              }}>
-                <div style={{
-                  width: 8, height: 8, borderRadius: '50%',
-                  background: 'var(--ds-primary)', marginBottom: 14,
-                }} />
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: 6 }}>
-                  {perk.title}
-                </h3>
-                <p style={{ fontSize: '13px', color: 'var(--ds-text-2)', lineHeight: 1.6, margin: 0 }}>
-                  {perk.body}
-                </p>
-              </div>
-            ))}
+            {pilotPerks.map((perk) => {
+              const PerkIcon = perk.icon
+              return (
+                <div key={perk.title} style={{
+                  background: 'var(--ds-surface-2)',
+                  border: '1px solid var(--ds-border-1)',
+                  borderRadius: '14px',
+                  padding: '24px 20px',
+                }}>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: 10,
+                    background: 'var(--ds-surface-1)',
+                    border: '1px solid var(--ds-border-1)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    marginBottom: 14,
+                  }}>
+                    <PerkIcon size={18} color="var(--ds-primary)" />
+                  </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: 6 }}>
+                    {perk.title}
+                  </h3>
+                  <p style={{ fontSize: '13px', color: 'var(--ds-text-2)', lineHeight: 1.6, margin: 0 }}>
+                    {perk.body}
+                  </p>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
