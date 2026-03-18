@@ -11,22 +11,21 @@ function StatusFlow() {
   const steps = ['Pending', 'Reviewing', 'Confirmed']
   const colors = ['var(--ds-text-3)', 'var(--ds-primary)', '#22c55e']
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
       {steps.map((s, i) => (
-        <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <div style={{
-            padding: '4px 10px',
+            padding: '4px 8px',
             borderRadius: 9999,
             background: i === 2 ? 'rgba(34,197,94,0.12)' : i === 1 ? 'rgba(61,125,175,0.15)' : 'var(--ds-surface-2)',
             border: `1px solid ${colors[i]}`,
             fontSize: 11,
             fontWeight: 600,
             color: colors[i],
-            whiteSpace: 'nowrap',
           }}>
             {s}
           </div>
-          {i < 2 && <div style={{ width: 16, height: 1, background: 'var(--ds-border-1)' }} />}
+          {i < 2 && <div style={{ width: 12, height: 1, background: 'var(--ds-border-1)', flexShrink: 0 }} />}
         </div>
       ))}
     </div>
@@ -36,11 +35,11 @@ function StatusFlow() {
 function FleetTimeline() {
   const ports = ['MIA', 'BCN', 'PIR', 'DUB', 'SOU']
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 48 }}>
+    <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 48, flexWrap: 'nowrap', maxWidth: '100%' }}>
       {ports.map((p, i) => (
-        <div key={p} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+        <div key={p} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flex: '1 1 0', minWidth: 0 }}>
           <div style={{
-            width: 28, height: `${24 + i * 4}px`,
+            width: '100%', maxWidth: 28, height: `${22 + i * 4}px`,
             background: i === 2 ? 'var(--ds-primary)' : 'var(--ds-surface-2)',
             border: '1px solid var(--ds-border-1)',
             borderRadius: 4,

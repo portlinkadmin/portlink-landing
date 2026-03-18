@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface BentoCardProps {
@@ -13,7 +13,17 @@ interface BentoCardProps {
 }
 
 export function BentoCard({ title, description, visual, span = 'half', accent = false, delay = 0 }: BentoCardProps) {
-  const colSpan = {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // On mobile: always full width (1 column). Desktop: honour span.
+  const colSpan = isMobile ? '1 / -1' : {
     full: '1 / -1',
     half: 'span 1',
     third: 'span 1',
@@ -25,13 +35,13 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: isMobile ? 0 : delay, ease: [0.22, 1, 0.36, 1] }}
       style={{
         gridColumn: colSpan,
         background: accent ? 'var(--ds-primary)' : 'var(--ds-surface-1)',
         border: `1px solid ${accent ? 'transparent' : 'var(--ds-border-1)'}`,
         borderRadius: '20px',
-        padding: '32px',
+        padding: '28px 24px',
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
@@ -43,16 +53,16 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
       whileHover={{
         boxShadow: accent
           ? '0 8px 32px rgba(61,125,175,0.35)'
-          : '0 4px 24px rgba(0,0,0,0.25)',
+          : '0 4px 24px rgba(0,0,0,0.12)',
       }}
     >
-      {/* Subtle corner glow for non-accent cards */}
+      {/* Subtle corner glow */}
       {!accent && (
         <div style={{
           position: 'absolute',
           top: 0, right: 0,
           width: 120, height: 120,
-          background: 'radial-gradient(circle at top right, var(--ds-focus-ring, rgba(61,125,175,0.08)), transparent 70%)',
+          background: 'radial-gradient(circle at top right, var(--ds-focus-ring, rgba(61,125,175,0.06)), transparent 70%)',
           pointerEvents: 'none',
         }} />
       )}
@@ -61,10 +71,11 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
       {visual && (
         <div style={{
           width: '100%',
-          height: '80px',
+          minHeight: '60px',
           display: 'flex',
           alignItems: 'center',
-          marginBottom: '4px',
+          flexWrap: 'wrap',
+          gap: 4,
         }}>
           {visual}
         </div>
@@ -72,7 +83,7 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
 
       <div>
         <h3 style={{
-          fontSize: '17px',
+          fontSize: '16px',
           fontWeight: 700,
           color: accent ? 'white' : 'var(--ds-text-1)',
           margin: '0 0 8px',
@@ -98,11 +109,23 @@ interface BentoGridProps {
   columns?: 2 | 3
 }
 
-export function BentoGrid({ children, columns = 2 }: BentoGridProps) {
+export function BentoGrid({ children, columns = 3 }: BentoGridProps) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: `repeat(${columns}, 1fr)`,
+      // Mobile: single column. Tablet: 2 cols. Desktop: full columns.
+      gridTemplateColumns: isMobile
+        ? '1fr'
+        : `repeat(${columns}, 1fr)`,
       gap: '16px',
       width: '100%',
     }}>
