@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <style>
+    :root { color-scheme: dark light }
+    html:not([data-theme="light"]) { background: #050d18; color: #f0f4fa }
+    html[data-theme="light"] { background: #f7f9fc; color: #0b1220 }
+  </style>
+  <script>
+    (function(){
+      var t = localStorage.getItem('ds-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="utf-8" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PortLink — It's 2026. Let's move on.</title>
+  <meta name="description" content="PortLink replaces email-as-infrastructure with system-as-infrastructure for cruise port operations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/ds-styles.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+
+  <style>
+    /* ============================================================
+       LANDING PAGE — Layout & Section Styles
+       All colors via DS tokens. No color-mix().
+       ============================================================ */
+
+    /* ── General ── */
+    .lp-page { overflow-x: hidden; }
+
+    /* ── Hero Grid ── */
+    .lp-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-10);
+      align-items: center;
+      padding-block: var(--ds-gap-16) var(--ds-gap-12);
+    }
+    @media (min-width: 900px) {
+      .lp-hero-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        padding-block: var(--ds-gap-20) var(--ds-gap-16);
+      }
+    }
+
+    /* ── Hero Left ── */
+    .lp-eyebrow {
+      font-family: var(--ds-font-mono);
+      font-size: var(--ds-text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wider);
+      color: var(--ds-text-3);
+      line-height: var(--pl-leading-normal);
+    }
+
+    .lp-logo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--ds-gap-3);
+      flex-wrap: wrap;
+    }
+
+    .lp-logo-row img {
+      height: 28px;
+      width: auto;
+    }
+
+    .lp-hero-h1 {
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-hero);
+      font-weight: var(--pl-w-extrabold);
+      letter-spacing: var(--pl-track-tighter);
+      line-height: var(--pl-leading-compact);
+      color: var(--ds-text-1);
+    }
+
+    .lp-hero-lead {
+      font-size: var(--pl-text-18);
+      line-height: var(--pl-leading-relaxed);
+      color: var(--ds-text-2);
+      max-width: 52ch;
+    }
+
+    .lp-cta-row {
+      display: flex;
+      align-items: center;
+      gap: var(--ds-gap-4);
+      flex-wrap: wrap;
+    }
+
+    .lp-hero-subtle {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-3);
+      max-width: 48ch;
+    }
+
+    /* ── Hero Callout Card ── */
+    .lp-callout {
+      position: relative;
+      background: linear-gradient(180deg, var(--ds-surface-1), var(--ds-surface-2));
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-xl);
+      padding: var(--ds-gap-6);
+      box-shadow: var(--ds-shadow-2);
+    }
+
+    .lp-callout::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 520px at 30% 20%, rgba(34, 211, 238, 0.12), transparent 55%),
+        radial-gradient(900px 520px at 75% 55%, rgba(26, 94, 107, 0.15), transparent 60%);
+      filter: blur(2px);
+    }
+
+    .lp-callout-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ds-gap-3);
+      margin-bottom: var(--ds-gap-4);
+      flex-wrap: wrap;
+    }
+
+    .lp-callout-label {
+      font-family: var(--ds-font-mono);
+      font-size: var(--ds-text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wide);
+      color: var(--ds-accent-strong);
+    }
+
+    .lp-callout-title {
+      font-size: var(--pl-text-16);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+    }
+
+    .lp-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ds-gap-3);
+      margin-bottom: var(--ds-gap-4);
+    }
+
+    .lp-kpi {
+      text-align: center;
+      padding: var(--ds-gap-3);
+      background: var(--ds-surface-2);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-md);
+    }
+
+    .lp-kpi-value {
+      font-family: var(--ds-font-display);
+      font-size: var(--pl-text-24);
+      font-weight: var(--pl-w-bold);
+      color: var(--ds-text-1);
+      line-height: var(--pl-leading-compact);
+    }
+
+    .lp-kpi-label {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-3);
+      margin-top: var(--ds-gap-1);
+    }
+
+    /* ── Section Shared ── */
+    .lp-section-title {
+      font-size: var(--ds-h2);
+      font-weight: var(--pl-w-semibold);
+      letter-spacing: var(--ds-track-title);
+      color: var(--ds-text-1);
+    }
+
+    .lp-section-eyebrow {
+      font-family: var(--ds-font-mono);
+      font-size: var(--ds-text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wider);
+      color: var(--ds-accent-strong);
+    }
+
+    .lp-section-lead {
+      font-size: var(--ds-text-body);
+      color: var(--ds-text-2);
+      max-width: 58ch;
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    /* ── Who Section ── */
+    .lp-tabs-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--ds-gap-8);
+    }
+
+    .lp-audience-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-6);
+    }
+    @media (min-width: 640px) {
+      .lp-audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .lp-audience-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .lp-audience-card-title {
+      font-size: var(--ds-h3);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+    }
+
+    .lp-audience-card-desc {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    .lp-tab-panel[hidden] { display: none; }
+
+    /* ── Pain Section ── */
+    .lp-pain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-10);
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .lp-pain-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .lp-pain-text h2 { margin-bottom: var(--ds-gap-4); }
+
+    .lp-chaos-card {
+      background: var(--ds-surface-1);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--ds-shadow-2);
+    }
+
+    .lp-chaos-topbar {
+      display: flex;
+      align-items: center;
+      gap: var(--ds-gap-2);
+      padding: var(--ds-gap-2) var(--ds-gap-4);
+      background: var(--ds-surface-2);
+      border-bottom: 1px solid var(--ds-border-1);
+    }
+
+    .lp-chaos-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lp-chaos-pill {
+      font-size: var(--ds-text-xs);
+      font-family: var(--ds-font-mono);
+      padding: var(--ds-gap-1) var(--ds-gap-3);
+      border-radius: var(--ds-radius-pill);
+      background: var(--ds-surface-3);
+      color: var(--ds-text-2);
+      border: 1px solid var(--ds-border-1);
+    }
+
+    .lp-chaos-pill--active {
+      background: var(--ds-accent-subtle);
+      color: var(--ds-accent-strong);
+      border-color: var(--ds-accent-strong);
+    }
+
+    .lp-chaos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      font-size: var(--ds-text-xs);
+      font-family: var(--ds-font-mono);
+    }
+
+    .lp-chaos-cell {
+      padding: var(--ds-gap-2) var(--ds-gap-3);
+      border-bottom: 1px solid var(--ds-border-1);
+      border-right: 1px solid var(--ds-border-1);
+      color: var(--ds-text-2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lp-chaos-cell--header {
+      background: var(--ds-surface-2);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-3);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wide);
+      font-size: var(--pl-text-10);
+    }
+
+    .lp-chaos-cell--danger { color: var(--ds-danger); }
+    .lp-chaos-cell--warning { color: var(--ds-warning); }
+
+    .lp-chaos-email {
+      padding: var(--ds-gap-4);
+      border-top: 1px solid var(--ds-border-1);
+    }
+
+    .lp-chaos-email-from {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-3);
+      margin-bottom: var(--ds-gap-1);
+    }
+
+    .lp-chaos-email-subject {
+      font-size: var(--ds-text-sm);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+      margin-bottom: var(--ds-gap-1);
+    }
+
+    .lp-chaos-email-body {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    .lp-chaos-email-urgent {
+      display: inline-block;
+      font-size: var(--pl-text-10);
+      font-weight: var(--pl-w-bold);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wide);
+      color: var(--ds-danger);
+      padding: var(--ds-gap-1) var(--ds-gap-2);
+      border: 1px solid var(--ds-danger);
+      border-radius: var(--ds-radius-sm);
+      margin-left: var(--ds-gap-2);
+    }
+
+    /* ── How It Works Section ── */
+    .lp-how-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-8);
+    }
+    @media (min-width: 900px) {
+      .lp-how-grid {
+        grid-template-columns: 280px 1fr;
+        gap: var(--ds-gap-10);
+      }
+    }
+
+    .lp-rail {
+      position: relative;
+    }
+    @media (min-width: 900px) {
+      .lp-rail {
+        position: sticky;
+        top: 100px;
+        align-self: start;
+      }
+    }
+
+    .lp-rail-card {
+      background: var(--ds-surface-1);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-lg);
+      padding: var(--ds-gap-6);
+      box-shadow: var(--ds-shadow-1);
+    }
+
+    .lp-rail-title {
+      font-size: var(--ds-text-xs);
+      font-family: var(--ds-font-mono);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wider);
+      color: var(--ds-text-3);
+      margin-bottom: var(--ds-gap-6);
+    }
+
+    .lp-timeline {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+
+    .lp-timeline-step {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: var(--ds-gap-3);
+      align-items: start;
+      padding-bottom: var(--ds-gap-6);
+      position: relative;
+    }
+
+    .lp-timeline-step:last-child { padding-bottom: 0; }
+
+    .lp-timeline-step::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 24px;
+      bottom: 0;
+      width: 1px;
+      background: var(--ds-border-1);
+    }
+
+    .lp-timeline-step:last-child::before { display: none; }
+
+    .lp-timeline-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--ds-border-2);
+      background: var(--ds-surface-2);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all var(--pl-dur-3) var(--pl-ease-out);
+      position: relative;
+      z-index: 1;
+    }
+
+    .lp-timeline-dot-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ds-border-2);
+      transition: all var(--pl-dur-3) var(--pl-ease-out);
+    }
+
+    .lp-timeline-step.is-active .lp-timeline-dot {
+      border-color: var(--ds-accent-strong);
+      background: var(--ds-accent-subtle);
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15), 0 0 16px rgba(34, 211, 238, 0.20);
+    }
+
+    .lp-timeline-step.is-active .lp-timeline-dot-inner {
+      background: var(--ds-accent-strong);
+    }
+
+    .lp-timeline-label {
+      font-size: var(--ds-text-sm);
+      font-weight: var(--pl-w-medium);
+      color: var(--ds-text-3);
+      padding-top: 2px;
+      transition: color var(--pl-dur-3) var(--pl-ease-out);
+    }
+
+    .lp-timeline-step.is-active .lp-timeline-label {
+      color: var(--ds-text-1);
+      font-weight: var(--pl-w-semibold);
+    }
+
+    .lp-stories { display: grid; gap: var(--ds-gap-8); }
+
+    .lp-story-card {
+      background: var(--ds-surface-1);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-lg);
+      padding: var(--ds-gap-8);
+      box-shadow: var(--ds-shadow-1);
+    }
+
+    .lp-story-step {
+      font-family: var(--ds-font-mono);
+      font-size: var(--ds-text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--pl-track-wider);
+      color: var(--ds-accent-strong);
+      margin-bottom: var(--ds-gap-2);
+    }
+
+    .lp-story-title {
+      font-size: var(--ds-h3);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+      margin-bottom: var(--ds-gap-3);
+    }
+
+    .lp-story-desc {
+      font-size: var(--ds-text-body);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+      max-width: 56ch;
+    }
+
+    .lp-story-detail {
+      margin-top: var(--ds-gap-4);
+      padding: var(--ds-gap-4);
+      background: var(--ds-surface-2);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-md);
+      font-family: var(--ds-font-mono);
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    /* ── Pilot Section ── */
+    .lp-pilot-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-6);
+    }
+    @media (min-width: 768px) {
+      .lp-pilot-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .lp-pilot-name {
+      font-size: var(--ds-h3);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+    }
+
+    .lp-pilot-desc {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    .lp-pilot-quote {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-3);
+      font-style: italic;
+      border-left: 2px solid var(--ds-border-2);
+      padding-left: var(--ds-gap-4);
+      margin-top: var(--ds-gap-3);
+    }
+
+    /* ── Waitlist Section ── */
+    .lp-waitlist-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-10);
+    }
+    @media (min-width: 900px) {
+      .lp-waitlist-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+
+    .lp-form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ds-gap-4);
+    }
+    @media (min-width: 640px) {
+      .lp-form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .lp-form-full {
+      grid-column: 1 / -1;
+    }
+
+    .lp-built-card {
+      background: var(--ds-surface-1);
+      border: 1px solid var(--ds-border-1);
+      border-radius: var(--ds-radius-lg);
+      padding: var(--ds-gap-8);
+      box-shadow: var(--ds-shadow-1);
+      align-self: start;
+    }
+
+    .lp-built-title {
+      font-size: var(--ds-h3);
+      font-weight: var(--pl-w-semibold);
+      color: var(--ds-text-1);
+      margin-bottom: var(--ds-gap-4);
+    }
+
+    .lp-built-list {
+      display: grid;
+      gap: var(--ds-gap-3);
+    }
+
+    .lp-built-item {
+      display: flex;
+      gap: var(--ds-gap-3);
+      align-items: start;
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-2);
+      line-height: var(--pl-leading-relaxed);
+    }
+
+    .lp-built-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--ds-accent-subtle);
+      border: 1px solid var(--ds-accent-strong);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      color: var(--ds-accent-strong);
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
+    .lp-footer {
+      border-top: 1px solid var(--ds-border-1);
+      padding-block: var(--ds-gap-8);
+    }
+
+    .lp-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--ds-gap-4);
+    }
+
+    .lp-footer-copy {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-3);
+    }
+
+    .lp-footer-tagline {
+      font-size: var(--ds-text-xs);
+      font-family: var(--ds-font-mono);
+      color: var(--ds-text-3);
+      letter-spacing: var(--pl-track-wide);
+    }
+
+    /* ── Accent Text ── */
+    .lp-accent { color: var(--ds-accent-strong); }
+
+    /* ── Scroll-fade ── */
+    .lp-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--pl-dur-4) var(--pl-ease-out), transform var(--pl-dur-4) var(--pl-ease-out);
+    }
+    .lp-fade-in.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Pain highlight markers ── */
+    .lp-highlight {
+      background: rgba(34, 211, 238, 0.12);
+      padding: 0 var(--ds-gap-1);
+      border-radius: var(--ds-radius-sm);
+      color: var(--ds-accent-strong);
+    }
+
+    /* ── Section border-top accent ── */
+    .lp-section-border {
+      border-top: 1px solid var(--ds-border-1);
+    }
+
+    /* ── Section padding: 80px top/bottom ── */
+    .ds-section {
+      padding-block: 80px;
+    }
+
+    /* ── CTA: brand blue override for landing page ── */
+    .ds-btn--primary {
+      background: var(--pl-sky-500);
+      border-color: var(--pl-sky-500);
+      color: var(--pl-slate-0);
+    }
+    .ds-btn--primary:hover {
+      background: var(--pl-sky-600);
+      border-color: var(--pl-sky-600);
+      color: var(--pl-slate-0);
+    }
+  </style>
+</head>
+
+<body class="lp-page">
+
+  <!-- ============================================================
+       1. NAVIGATION
+       ============================================================ -->
+  <header class="ds-nav" role="banner">
+    <nav class="ds-container ds-nav__inner" aria-label="Primary navigation">
+      <a href="#" class="ds-brand" aria-label="PortLink Home">
+        <img src="assets/portlink-logo.png" alt="" height="18" width="68" />
+        <span>PortLink</span>
+      </a>
+
+      <div class="ds-nav__links u-hide-mobile">
+        <a href="#who" class="ds-link">Who it's for</a>
+        <a href="#pain" class="ds-link">Pain</a>
+        <a href="#how" class="ds-link">How it works</a>
+        <a href="#access" class="ds-link">Request access</a>
+        <button type="button" class="ds-btn ds-btn--ghost" id="themeToggle" aria-label="Toggle theme">
+          <span aria-hidden="true">☀︎</span>
+        </button>
+      </div>
+
+      <!-- Mobile: theme toggle only (hamburger from nav.js if needed) -->
+      <button type="button" class="ds-btn ds-btn--ghost u-hide-mobile" id="themeToggleMobile" aria-label="Toggle theme" style="display:none;">
+        <span aria-hidden="true">☀︎</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         2. HERO
+         ============================================================ -->
+    <section class="ds-hero" aria-labelledby="hero-heading">
+      <div class="ds-container ds-hero__inner">
+        <div class="lp-hero-grid">
+
+          <!-- Left Column -->
+          <div class="u-stack" style="gap: var(--ds-gap-5);">
+            <p class="lp-eyebrow">Operational coordination infrastructure for the cruise industry</p>
+
+            <div class="lp-logo-row">
+              <img src="assets/portlink-logo.png" alt="PortLink logo" height="28" width="106" />
+              <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true"></span> Design System Demo</span>
+            </div>
+
+            <h1 id="hero-heading" class="lp-hero-h1 ds-display">
+              Replace email&nbsp;chaos with system&nbsp;clarity.
+            </h1>
+
+            <p class="lp-hero-lead">
+              PortLink connects <strong>Cruise Lines</strong>, <strong>Port Agents</strong>, and
+              <strong>Tour Operators</strong> in one shared workspace — replacing scattered emails,
+              Excel files, and PDF attachments with structured, auditable coordination.
+            </p>
+
+            <div class="lp-cta-row">
+              <a href="#access" class="ds-btn ds-btn--primary ds-btn--lg">Request pilot access</a>
+              <a href="#how" class="ds-btn ds-btn--lg">See how it works</a>
+              <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Pilot open</span>
+            </div>
+
+            <p class="lp-hero-subtle">
+              No procurement. No IT project. Start with one port call, see the difference in 48&nbsp;hours.
+            </p>
+          </div>
+
+          <!-- Right Column — Callout Card -->
+          <div class="lp-callout" aria-label="Live coordination example">
+            <div class="lp-callout-header">
+              <div>
+                <p class="lp-callout-label">Live coordination</p>
+                <p class="lp-callout-title">Port Call: OSLO-2026-031</p>
+              </div>
+              <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> On track</span>
+            </div>
+
+            <!-- KPI Grid -->
+            <div class="lp-kpi-grid" role="list" aria-label="Key performance indicators">
+              <div class="lp-kpi" role="listitem">
+                <div class="lp-kpi-value">17</div>
+                <div class="lp-kpi-label">Owners</div>
+              </div>
+              <div class="lp-kpi" role="listitem">
+                <div class="lp-kpi-value">46</div>
+                <div class="lp-kpi-label">Actions</div>
+              </div>
+              <div class="lp-kpi" role="listitem">
+                <div class="lp-kpi-value">100%</div>
+                <div class="lp-kpi-label">Audit trail</div>
+              </div>
+            </div>
+
+            <!-- Mini Table -->
+            <table class="ds-table ds-table--dense" aria-label="Recent changes">
+              <thead>
+                <tr>
+                  <th>Change</th>
+                  <th>Owner</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="ds-table__cell">
+                      <span>Gangway position updated</span>
+                      <span class="ds-table__kicker">Berth 14-A</span>
+                    </div>
+                  </td>
+                  <td>Oslo Port Auth.</td>
+                  <td class="ds-table__muted">3 min ago</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="ds-table__cell">
+                      <span>Tour bus manifest confirmed</span>
+                      <span class="ds-table__kicker">Excursion #7</span>
+                    </div>
+                  </td>
+                  <td>NordTours AS</td>
+                  <td class="ds-table__muted">11 min ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. WHO IT'S FOR
+         ============================================================ -->
+    <section class="ds-section lp-section-border" id="who" aria-labelledby="who-heading">
+      <div class="ds-container u-stack-lg">
+        <div class="u-stack" style="gap: var(--ds-gap-3); text-align: center; align-items: center;">
+          <p class="lp-section-eyebrow">Audience</p>
+          <h2 id="who-heading" class="lp-section-title">Who it's for</h2>
+          <p class="lp-section-lead" style="margin-inline: auto;">
+            PortLink serves three roles in every port call. Each sees the same data, filtered for what they need.
+          </p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="lp-tabs-center" role="tablist" aria-label="Audience selector">
+          <div class="ds-tabs">
+            <button class="ds-tab" role="tab" aria-selected="true" aria-controls="panel-cruise" id="tab-cruise">Cruise Lines</button>
+            <button class="ds-tab" role="tab" aria-selected="false" aria-controls="panel-agents" id="tab-agents">Port Agents</button>
+            <button class="ds-tab" role="tab" aria-selected="false" aria-controls="panel-tours" id="tab-tours">Tour Operators</button>
+          </div>
+        </div>
+
+        <!-- Panel: Cruise Lines -->
+        <div class="lp-tab-panel" id="panel-cruise" role="tabpanel" aria-labelledby="tab-cruise">
+          <div class="lp-audience-grid">
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Visibility</span>
+                <p class="lp-audience-card-title">Fleet-wide oversight</p>
+                <p class="lp-audience-card-desc">Track every port call across your fleet in one dashboard. No more chasing agents for updates across time zones.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Compliance</span>
+                <p class="lp-audience-card-title">Audit-ready from day one</p>
+                <p class="lp-audience-card-desc">Every change is logged with who, what, when. GDPR-ready data handling with role-based access control.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Efficiency</span>
+                <p class="lp-audience-card-title">Cut coordination time by 70%</p>
+                <p class="lp-audience-card-desc">Structured port call templates replace free-form email chains. Pre-built workflows for berthing, provisions, and excursions.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Integration</span>
+                <p class="lp-audience-card-title">Connect to existing systems</p>
+                <p class="lp-audience-card-desc">REST API and webhooks let you pipe port call data into your PMS, ERP, or BI tools without manual re-entry.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Cost</span>
+                <p class="lp-audience-card-title">No upfront investment</p>
+                <p class="lp-audience-card-desc">Per-port-call pricing means you pay for what you use. No enterprise contract, no minimum commitment.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Speed</span>
+                <p class="lp-audience-card-title">Live status, not stale reports</p>
+                <p class="lp-audience-card-desc">Real-time updates mean your ops center always has the current picture — not yesterday's Excel export.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Port Agents -->
+        <div class="lp-tab-panel" id="panel-agents" role="tabpanel" aria-labelledby="tab-agents" hidden>
+          <div class="lp-audience-grid">
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Workload</span>
+                <p class="lp-audience-card-title">One inbox per port call</p>
+                <p class="lp-audience-card-desc">Stop drowning in CC'd emails. Every task, document, and update lives in the port call workspace — not your inbox.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Handoff</span>
+                <p class="lp-audience-card-title">Shift-ready context</p>
+                <p class="lp-audience-card-desc">When your colleague takes over, they see the full picture — not a forwarded chain with "see below".</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Templates</span>
+                <p class="lp-audience-card-title">Pre-built port call flows</p>
+                <p class="lp-audience-card-desc">Standard checklists for berthing, customs, provisioning, waste — customizable per port and vessel type.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Multi-line</span>
+                <p class="lp-audience-card-title">Serve multiple lines</p>
+                <p class="lp-audience-card-desc">Separate workspaces per cruise line with shared port infrastructure. No data leaks between clients.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Proof</span>
+                <p class="lp-audience-card-title">Timestamped evidence</p>
+                <p class="lp-audience-card-desc">When disputes arise, you have a complete, immutable log. No more "I never received that email".</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Mobile</span>
+                <p class="lp-audience-card-title">Works on the quay</p>
+                <p class="lp-audience-card-desc">Mobile-first design means you can confirm arrivals, update statuses, and flag issues from the berth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Tour Operators -->
+        <div class="lp-tab-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" hidden>
+          <div class="lp-audience-grid">
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Timing</span>
+                <p class="lp-audience-card-title">Know when they dock</p>
+                <p class="lp-audience-card-desc">Real-time ETA updates mean you position buses and guides at exactly the right time — not two hours early "just in case".</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Manifests</span>
+                <p class="lp-audience-card-title">Passenger counts, live</p>
+                <p class="lp-audience-card-desc">Get confirmed headcounts for each excursion directly from the cruise line — no agent middleman needed.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Changes</span>
+                <p class="lp-audience-card-title">Instant change alerts</p>
+                <p class="lp-audience-card-desc">If the ship is delayed or an excursion is cancelled, you know immediately — not when a PDF arrives at 11pm.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Invoicing</span>
+                <p class="lp-audience-card-title">Clean billing data</p>
+                <p class="lp-audience-card-desc">Structured records of services delivered mean faster invoicing and fewer disputes with cruise lines.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Season</span>
+                <p class="lp-audience-card-title">Plan your whole season</p>
+                <p class="lp-audience-card-desc">See all upcoming port calls for your region. Allocate guides, vehicles, and capacity weeks in advance.</p>
+              </div>
+            </div>
+            <div class="ds-card ds-card__pad">
+              <div class="u-stack-sm">
+                <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Reputation</span>
+                <p class="lp-audience-card-title">Build trust with lines</p>
+                <p class="lp-audience-card-desc">Professional, on-time coordination through PortLink signals reliability — making you the preferred operator.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. PAIN
+         ============================================================ -->
+    <section class="ds-section lp-section-border" id="pain" aria-labelledby="pain-heading">
+      <div class="ds-container">
+        <div class="lp-pain-grid">
+
+          <!-- Left: Text -->
+          <div class="lp-pain-text u-stack" style="gap: var(--ds-gap-5);">
+            <p class="lp-section-eyebrow">The problem</p>
+            <h2 id="pain-heading" class="lp-section-title">This is what coordination looks like today.</h2>
+            <p class="lp-section-lead">
+              A single port call involves <span class="lp-highlight">17+ stakeholders</span>,
+              <span class="lp-highlight">3 time zones</span>, and an average of
+              <span class="lp-highlight">283 emails</span> over 6 weeks.
+            </p>
+            <p style="color: var(--ds-text-2); line-height: var(--pl-leading-relaxed);">
+              Critical updates get buried in reply-all chains. Version control means "Final_v3_REVISED_USE_THIS.xlsx".
+              Handoffs between shifts rely on sticky notes and institutional memory.
+            </p>
+            <p style="color: var(--ds-text-2); line-height: var(--pl-leading-relaxed);">
+              When something goes wrong — a delayed berthing, a last-minute excursion change, a customs hold —
+              there's no single place to see what happened, who was notified, or what the current status is.
+            </p>
+            <p style="color: var(--ds-text-3); font-size: var(--ds-text-sm);">
+              The industry knows this is broken. But the cost of change has always been higher than the cost of chaos.
+              <strong style="color: var(--ds-text-1);">Until now.</strong>
+            </p>
+          </div>
+
+          <!-- Right: Chaos Card -->
+          <div class="lp-chaos-card" aria-label="Illustration of chaotic legacy coordination tools">
+            <div class="lp-chaos-topbar">
+              <span class="lp-chaos-dot" style="background: #ef4444;" aria-hidden="true"></span>
+              <span class="lp-chaos-dot" style="background: #f59e0b;" aria-hidden="true"></span>
+              <span class="lp-chaos-dot" style="background: #10b981;" aria-hidden="true"></span>
+              <span style="flex:1;"></span>
+              <span class="lp-chaos-pill lp-chaos-pill--active">Legacy Ops.xlsx</span>
+              <span class="lp-chaos-pill">Inbox (283)</span>
+            </div>
+
+            <div class="lp-chaos-grid" role="presentation">
+              <!-- Header Row -->
+              <div class="lp-chaos-cell lp-chaos-cell--header">Vessel</div>
+              <div class="lp-chaos-cell lp-chaos-cell--header">ETA</div>
+              <div class="lp-chaos-cell lp-chaos-cell--header">Status</div>
+              <div class="lp-chaos-cell lp-chaos-cell--header">Agent</div>
+              <!-- Row 1 -->
+              <div class="lp-chaos-cell">MS Nordic Sun</div>
+              <div class="lp-chaos-cell lp-chaos-cell--warning">TBD??</div>
+              <div class="lp-chaos-cell lp-chaos-cell--danger">OVERDUE</div>
+              <div class="lp-chaos-cell">Ask Lars</div>
+              <!-- Row 2 -->
+              <div class="lp-chaos-cell">AIDAnova</div>
+              <div class="lp-chaos-cell">06:00 (old?)</div>
+              <div class="lp-chaos-cell">See email</div>
+              <div class="lp-chaos-cell" style="color:var(--ds-text-3);">—</div>
+              <!-- Row 3 -->
+              <div class="lp-chaos-cell">Hurtigruten</div>
+              <div class="lp-chaos-cell">14:30</div>
+              <div class="lp-chaos-cell lp-chaos-cell--warning">Changed?</div>
+              <div class="lp-chaos-cell">Maria (on leave)</div>
+              <!-- Row 4 -->
+              <div class="lp-chaos-cell" style="color:var(--ds-text-3);">???</div>
+              <div class="lp-chaos-cell lp-chaos-cell--danger">#REF!</div>
+              <div class="lp-chaos-cell" style="color:var(--ds-text-3);">#N/A</div>
+              <div class="lp-chaos-cell" style="color:var(--ds-text-3);">—</div>
+            </div>
+
+            <div class="lp-chaos-email">
+              <p class="lp-chaos-email-from">
+                From: ops@cruiseline.com &nbsp;→&nbsp; To: 283 recipients
+              </p>
+              <p class="lp-chaos-email-subject">
+                RE: RE: FW: OSLO 2026-031 — Updated Gangway Position
+                <span class="lp-chaos-email-urgent">URGENT</span>
+              </p>
+              <p class="lp-chaos-email-body">
+                Hi all,<br />
+                Please disregard previous email. The correct berth is 14-A, not 14-B.<br />
+                Apologies for any confusion. Updated PDF attached (v7_FINAL).
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. HOW IT WORKS
+         ============================================================ -->
+    <section class="ds-section lp-section-border" id="how" aria-labelledby="how-heading">
+      <div class="ds-container u-stack-lg">
+        <div class="u-stack" style="gap: var(--ds-gap-3);">
+          <p class="lp-section-eyebrow">Process</p>
+          <h2 id="how-heading" class="lp-section-title">How it works</h2>
+          <p class="lp-section-lead">Four steps. One system. Complete coordination.</p>
+        </div>
+
+        <div class="lp-how-grid">
+
+          <!-- Left: Sticky Rail -->
+          <div class="lp-rail" aria-hidden="true">
+            <div class="lp-rail-card">
+              <p class="lp-rail-title">Workflow</p>
+              <div class="lp-timeline">
+                <div class="lp-timeline-step is-active" data-step="0">
+                  <div class="lp-timeline-dot"><div class="lp-timeline-dot-inner"></div></div>
+                  <span class="lp-timeline-label">Capture</span>
+                </div>
+                <div class="lp-timeline-step" data-step="1">
+                  <div class="lp-timeline-dot"><div class="lp-timeline-dot-inner"></div></div>
+                  <span class="lp-timeline-label">Assign</span>
+                </div>
+                <div class="lp-timeline-step" data-step="2">
+                  <div class="lp-timeline-dot"><div class="lp-timeline-dot-inner"></div></div>
+                  <span class="lp-timeline-label">Approve</span>
+                </div>
+                <div class="lp-timeline-step" data-step="3">
+                  <div class="lp-timeline-dot"><div class="lp-timeline-dot-inner"></div></div>
+                  <span class="lp-timeline-label">Audit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Story Cards -->
+          <div class="lp-stories">
+            <div class="lp-story-card" data-story="0">
+              <p class="lp-story-step">Step 1</p>
+              <h3 class="lp-story-title">Capture every requirement</h3>
+              <p class="lp-story-desc">
+                Port call data flows in from cruise lines, port authorities, and service providers into structured templates.
+                No free-text emails — every piece of information has a field, a type, and a timestamp.
+              </p>
+              <div class="lp-story-detail">
+                <span style="color: var(--ds-accent-strong);">→</span> Vessel specs, berth preferences, provisioning needs, excursion manifests, customs declarations — all captured once, visible to all authorized parties.
+              </div>
+            </div>
+
+            <div class="lp-story-card" data-story="1">
+              <p class="lp-story-step">Step 2</p>
+              <h3 class="lp-story-title">Assign owners to every action</h3>
+              <p class="lp-story-desc">
+                Each task in a port call gets an owner, a deadline, and a status. The port agent coordinates, the cruise line approves,
+                and the service provider delivers — all in the same workspace.
+              </p>
+              <div class="lp-story-detail">
+                <span style="color: var(--ds-accent-strong);">→</span> "Gangway position" → Oslo Port Authority → Due: 48h before arrival → Status: Pending
+              </div>
+            </div>
+
+            <div class="lp-story-card" data-story="2">
+              <p class="lp-story-step">Step 3</p>
+              <h3 class="lp-story-title">Approve with one click</h3>
+              <p class="lp-story-desc">
+                Changes require explicit approval from the right stakeholder. No more "I assumed that was confirmed."
+                Every approval is logged, timestamped, and attributed.
+              </p>
+              <div class="lp-story-detail">
+                <span style="color: var(--ds-accent-strong);">→</span> Berth 14-A confirmed by Oslo Port Authority (K. Hansen) — 2026-03-04 09:14 UTC
+              </div>
+            </div>
+
+            <div class="lp-story-card" data-story="3">
+              <p class="lp-story-step">Step 4</p>
+              <h3 class="lp-story-title">Audit everything, automatically</h3>
+              <p class="lp-story-desc">
+                Every action, change, and decision is recorded in an immutable log. When auditors, insurers, or regulators
+                ask what happened — you have the answer in seconds, not days.
+              </p>
+              <div class="lp-story-detail">
+                <span style="color: var(--ds-accent-strong);">→</span> Full port call history exportable as JSON, CSV, or PDF. GDPR-compliant retention policies built in.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. PILOT CUSTOMERS
+         ============================================================ -->
+    <section class="ds-section lp-section-border" id="pilots" aria-labelledby="pilots-heading">
+      <div class="ds-container u-stack-lg">
+        <div class="u-stack" style="gap: var(--ds-gap-3); text-align: center; align-items: center;">
+          <p class="lp-section-eyebrow">Early access</p>
+          <h2 id="pilots-heading" class="lp-section-title">Pilot customers</h2>
+          <p class="lp-section-lead" style="margin-inline: auto;">
+            Three partners are validating PortLink with real port calls across Northern Europe.
+          </p>
+        </div>
+
+        <div class="lp-pilot-grid">
+          <div class="ds-card ds-card__pad">
+            <div class="u-stack-sm">
+              <span class="ds-badge ds-badge--info"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-info);box-shadow:0 0 0 2px rgba(14,165,233,0.25);"></span> Cruise Line</span>
+              <p class="lp-pilot-name">Nordic Voyages</p>
+              <p class="lp-pilot-desc">
+                Operating 4 vessels across 12 Norwegian ports. Using PortLink to coordinate all shore-side operations for the 2026 season.
+              </p>
+              <blockquote class="lp-pilot-quote">
+                "We used to spend more time coordinating than operating. PortLink made the coordination invisible."
+              </blockquote>
+            </div>
+          </div>
+
+          <div class="ds-card ds-card__pad">
+            <div class="u-stack-sm">
+              <span class="ds-badge ds-badge--success"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-success);box-shadow:0 0 0 2px rgba(16,185,129,0.25);"></span> Port Agent</span>
+              <p class="lp-pilot-name">HansaPort Services</p>
+              <p class="lp-pilot-desc">
+                Hamburg-based agent handling 200+ calls/year. Piloting PortLink for their Scandinavian route portfolio.
+              </p>
+              <blockquote class="lp-pilot-quote">
+                "My team stopped working weekends. That's not a feature — it's a structural change."
+              </blockquote>
+            </div>
+          </div>
+
+          <div class="ds-card ds-card__pad">
+            <div class="u-stack-sm">
+              <span class="ds-badge ds-badge--warning"><span class="ds-dot" aria-hidden="true" style="background: var(--ds-warning);box-shadow:0 0 0 2px rgba(245,158,11,0.25);"></span> Tour Operator</span>
+              <p class="lp-pilot-name">NordTours AS</p>
+              <p class="lp-pilot-desc">
+                Oslo-based excursion provider. Testing PortLink's live manifest updates and bus scheduling integration.
+              </p>
+              <blockquote class="lp-pilot-quote">
+                "We used to guess when ships arrived. Now we know — and our buses are already there."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. REQUEST ACCESS / WAITLIST
+         ============================================================ -->
+    <section class="ds-section lp-section-border" id="access" aria-labelledby="access-heading">
+      <div class="ds-container u-stack-lg">
+        <div class="u-stack" style="gap: var(--ds-gap-3);">
+          <p class="lp-section-eyebrow">Get started</p>
+          <h2 id="access-heading" class="lp-section-title">Request pilot access</h2>
+          <p class="lp-section-lead">
+            Spots are limited for the 2026 season. Tell us about your operation and we'll be in touch within 48&nbsp;hours.
+          </p>
+        </div>
+
+        <div class="lp-waitlist-grid">
+
+          <!-- Left: Form -->
+          <form id="waitlistForm" class="u-stack" style="gap: var(--ds-gap-6);" novalidate>
+            <div class="lp-form-grid">
+              <div class="ds-field">
+                <label class="ds-label" for="fname">First name</label>
+                <input class="ds-input" type="text" id="fname" name="fname" placeholder="Katrine" autocomplete="given-name" required />
+              </div>
+              <div class="ds-field">
+                <label class="ds-label" for="lname">Last name</label>
+                <input class="ds-input" type="text" id="lname" name="lname" placeholder="Hansen" autocomplete="family-name" required />
+              </div>
+              <div class="ds-field lp-form-full">
+                <label class="ds-label" for="email">Work email</label>
+                <input class="ds-input" type="email" id="email" name="email" placeholder="katrine@portauthority.no" autocomplete="email" required />
+              </div>
+              <div class="ds-field">
+                <label class="ds-label" for="company">Company</label>
+                <input class="ds-input" type="text" id="company" name="company" placeholder="Oslo Port Authority" autocomplete="organization" required />
+              </div>
+              <div class="ds-field">
+                <label class="ds-label" for="role">Your role</label>
+                <select class="ds-input" id="role" name="role" required>
+                  <option value="" disabled selected>Select role…</option>
+                  <option value="cruise-line">Cruise Line Operations</option>
+                  <option value="port-agent">Port Agent</option>
+                  <option value="tour-operator">Tour Operator</option>
+                  <option value="port-authority">Port Authority</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="ds-field lp-form-full">
+                <label class="ds-label" for="message">Tell us about your operation <span style="color: var(--ds-text-3); font-weight: var(--pl-w-regular);">(optional)</span></label>
+                <textarea class="ds-input" id="message" name="message" rows="4" placeholder="Number of port calls per year, key challenges, what you'd want to try first…"></textarea>
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="ds-btn ds-btn--primary ds-btn--lg">Request pilot access</button>
+            </div>
+
+            <div id="formSuccess" hidden style="padding: var(--ds-gap-4); background: var(--ds-success-bg); border: 1px solid var(--ds-badge-success-border); border-radius: var(--ds-radius-md);">
+              <p style="color: var(--ds-success); font-weight: var(--pl-w-semibold); font-size: var(--ds-text-sm);">
+                ✓ Request received. We'll be in touch within 48 hours.
+              </p>
+            </div>
+          </form>
+
+          <!-- Right: Built Card -->
+          <div class="lp-built-card">
+            <h3 class="lp-built-title">Built by people who know</h3>
+            <div class="lp-built-list">
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>Founded by port operations veterans with 20+ years of maritime logistics experience</span>
+              </div>
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>Designed with input from cruise lines, port agents, and tour operators across Northern Europe</span>
+              </div>
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>GDPR-compliant infrastructure hosted in the EU (Norway & Germany)</span>
+              </div>
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>No vendor lock-in — export all your data at any time in open formats</span>
+              </div>
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>SOC 2 Type II certification in progress, expected Q3 2026</span>
+              </div>
+              <div class="lp-built-item">
+                <span class="lp-built-icon" aria-hidden="true">✓</span>
+                <span>Free pilot program — no credit card, no commitment, real port calls</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       8. FOOTER
+       ============================================================ -->
+  <footer class="lp-footer" role="contentinfo">
+    <div class="ds-container lp-footer-inner">
+      <p class="lp-footer-copy">© 2026 PortLink. All rights reserved.</p>
+      <p class="lp-footer-tagline">It's 2026. Let's move on.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Theme Toggle ── */
+      var themeBtn = document.getElementById('themeToggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var current = root.getAttribute('data-theme') || 'dark';
+          var next = current === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('ds-theme', next);
+        });
+      }
+
+      /* ── Tab Switching ── */
+      var tabs = document.querySelectorAll('.ds-tab[role="tab"]');
+      var panels = document.querySelectorAll('.lp-tab-panel[role="tabpanel"]');
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          // Deactivate all
+          tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+          panels.forEach(function (p) { p.hidden = true; });
+
+          // Activate clicked
+          tab.setAttribute('aria-selected', 'true');
+          var panelId = tab.getAttribute('aria-controls');
+          var panel = document.getElementById(panelId);
+          if (panel) panel.hidden = false;
+        });
+
+        // Keyboard nav for tabs
+        tab.addEventListener('keydown', function (e) {
+          var tabArr = Array.from(tabs);
+          var idx = tabArr.indexOf(tab);
+          var next = -1;
+
+          if (e.key === 'ArrowRight') next = (idx + 1) % tabArr.length;
+          else if (e.key === 'ArrowLeft') next = (idx - 1 + tabArr.length) % tabArr.length;
+
+          if (next >= 0) {
+            e.preventDefault();
+            tabArr[next].focus();
+            tabArr[next].click();
+          }
+        });
+      });
+
+      /* ── Scrollytelling: IntersectionObserver ── */
+      var storyCards = document.querySelectorAll('.lp-story-card[data-story]');
+      var timelineSteps = document.querySelectorAll('.lp-timeline-step[data-step]');
+
+      if (storyCards.length && timelineSteps.length) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var stepIdx = entry.target.getAttribute('data-story');
+              timelineSteps.forEach(function (s) {
+                s.classList.toggle('is-active', s.getAttribute('data-step') === stepIdx);
+              });
+            }
+          });
+        }, {
+          rootMargin: '-30% 0px -60% 0px',
+          threshold: 0
+        });
+
+        storyCards.forEach(function (card) { observer.observe(card); });
+      }
+
+      /* ── Scroll Fade-in ── */
+      var fadeEls = document.querySelectorAll('.lp-fade-in');
+      if (fadeEls.length) {
+        var fadeObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              fadeObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        fadeEls.forEach(function (el) { fadeObserver.observe(el); });
+      }
+
+      /* ── Form Submission ── */
+      var form = document.getElementById('waitlistForm');
+      var formSuccess = document.getElementById('formSuccess');
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          // Show success (demo only)
+          formSuccess.hidden = false;
+          form.querySelector('button[type="submit"]').disabled = true;
+          form.querySelector('button[type="submit"]').textContent = 'Request sent';
+        });
+      }
+
+      /* ── Smooth scroll for anchor links ── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+    })();
+  </script>
+
+  <script>window.DS_CURRENT_PAGE = '03-pages/landing-v2.html';</script>
+  <script>window.DS_SIDEBAR_ENABLED = false;</script>
+  <script src="js/nav.js"></script>
+
+</body>
+</html>
