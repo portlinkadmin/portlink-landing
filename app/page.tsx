@@ -56,11 +56,14 @@ export default function Home() {
 
       lenis = new Lenis({
         autoRaf: false,
-        duration: prefersReduced ? 0 : 1.2,
-        easing: (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t, // ease-in-out quad
+        // lerp gives direct, natural feel vs duration which adds artificial lag
+        // 0.1 = very responsive; 0.08 still smooth but immediate-feeling
+        lerp: prefersReduced ? 1 : 0.1,
         smoothWheel: !prefersReduced,
         wheelMultiplier: 1.0,
         touchMultiplier: 1.5,
+        // syncTouch: true ensures mobile native-feel
+        syncTouch: true,
       } as ConstructorParameters<typeof Lenis>[0])
       window.__lenis = lenis
 

@@ -125,7 +125,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
               e.preventDefault()
               const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
               if (lenis) {
-                lenis.scrollTo('#access', { duration: 1.8, offset: -80 })
+                lenis.scrollTo('#access', { duration: 0.8, offset: -80 })
               } else {
                 document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
               }
@@ -151,7 +151,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
               e.preventDefault()
               const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
               if (lenis) {
-                lenis.scrollTo('#how', { duration: 1.2, offset: -80 })
+                lenis.scrollTo('#how', { duration: 0.8, offset: -80 })
               } else {
                 document.getElementById('how')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }
