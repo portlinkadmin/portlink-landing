@@ -124,12 +124,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
             href="#access"
             onClick={(e) => {
               e.preventDefault()
-              const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
-              if (lenis) {
-                lenis.scrollTo('#access', { duration: 0.8, offset: -80 })
-              } else {
-                document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
-              }
+              document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
             }}
             style={{
               background: 'var(--ds-primary)',
@@ -150,12 +145,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
             href="#how"
             onClick={(e) => {
               e.preventDefault()
-              const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
-              if (lenis) {
-                lenis.scrollTo('#how', { duration: 0.8, offset: -80 })
-              } else {
-                document.getElementById('how')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
+              document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })
             }}
             style={{
               border: '1px solid var(--ds-border-2)',

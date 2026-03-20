@@ -17,78 +17,17 @@ import Footer from '@/components/sections/Footer'
 
 export type Persona = 'all' | 'cruise' | 'agent' | 'tour'
 
-type LenisInstance = {
-  raf: (time: number) => void
-  destroy: () => void
-  scrollTo: (target: string | HTMLElement, options?: Record<string, unknown>) => void
-  on: (event: 'scroll', callback: () => void) => void
-}
-
-// Expose Lenis on window for nav anchor clicks
-declare global {
-  interface Window {
-    __lenis?: LenisInstance
-  }
-}
-
 export default function Home() {
   const [persona, setPersona] = useState<Persona | null>(null)
   const [gateVisible, setGateVisible] = useState(true)
   const [toggleVisible, setToggleVisible] = useState(false)
-
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
-  // Smooth scroll via Lenis
-  useEffect(() => {
-    let lenis: LenisInstance | null = null
-    let rafId: number
-    let destroyed = false
-
-    const init = async () => {
-      const { default: Lenis } = await import('lenis')
-      if (destroyed) return
-
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-      lenis = new Lenis({
-        autoRaf: false,
-        // lerp gives direct, natural feel vs duration which adds artificial lag
-        // 0.1 = very responsive; 0.08 still smooth but immediate-feeling
-        lerp: prefersReduced ? 1 : 0.1,
-        smoothWheel: !prefersReduced,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.5,
-        // syncTouch: true ensures mobile native-feel
-        syncTouch: true,
-      } as ConstructorParameters<typeof Lenis>[0])
-      window.__lenis = lenis
-
-      lenis.on('scroll', () => {
-        window.dispatchEvent(new Event('scroll'))
-      })
-
-      const raf = (time: number) => {
-        lenis!.raf(time)
-        rafId = requestAnimationFrame(raf)
-      }
-      rafId = requestAnimationFrame(raf)
-    }
-
-    init()
-
-    return () => {
-      destroyed = true
-      delete window.__lenis
-      if (lenis) lenis.destroy()
-      cancelAnimationFrame(rafId)
-    }
-  }, [])
-
-  // Show persona toggle after scrolling past 80vh
+  // Show persona toggle after scrolling past 80vh — native scroll event
   useEffect(() => {
     const handleScroll = () => {
       setToggleVisible(window.scrollY > window.innerHeight * 0.8)

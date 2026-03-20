@@ -137,12 +137,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           href="#access"
           onClick={(e) => {
             e.preventDefault()
-            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
-            if (lenis) {
-              lenis.scrollTo('#access', { duration: 0.8, offset: -80 })
-            } else {
-              document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
-            }
+            document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
           }}
           className="reveal"
           style={{
