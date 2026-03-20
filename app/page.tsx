@@ -21,6 +21,7 @@ type LenisInstance = {
   raf: (time: number) => void
   destroy: () => void
   scrollTo: (target: string | HTMLElement, options?: Record<string, unknown>) => void
+  on: (event: 'scroll', callback: () => void) => void
 }
 
 // Expose Lenis on window for nav anchor clicks
@@ -51,13 +52,21 @@ export default function Home() {
       const { default: Lenis } = await import('lenis')
       if (destroyed) return
 
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
       lenis = new Lenis({
         autoRaf: false,
-        duration: 1.6,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo-out
-        smoothWheel: true,
-      })
+        duration: prefersReduced ? 0 : 1.2,
+        easing: (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t, // ease-in-out quad
+        smoothWheel: !prefersReduced,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.5,
+      } as ConstructorParameters<typeof Lenis>[0])
       window.__lenis = lenis
+
+      lenis.on('scroll', () => {
+        window.dispatchEvent(new Event('scroll'))
+      })
 
       const raf = (time: number) => {
         lenis!.raf(time)

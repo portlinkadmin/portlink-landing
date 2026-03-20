@@ -15,7 +15,7 @@ const links = [
 function smoothScrollTo(href: string) {
   const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
   if (lenis) {
-    lenis.scrollTo(href, { duration: 1.8, offset: -80 })
+    lenis.scrollTo(href, { duration: 1.2, offset: -80 })
   } else {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }

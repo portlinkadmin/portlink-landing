@@ -139,7 +139,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
             e.preventDefault()
             const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
             if (lenis) {
-              lenis.scrollTo('#access', { duration: 1.8, offset: -80 })
+              lenis.scrollTo('#access', { duration: 1.2, offset: -80 })
             } else {
               document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' })
             }
