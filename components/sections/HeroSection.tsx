@@ -49,6 +49,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        contain: 'layout style',
       }}
     >
       <WavesHero />
