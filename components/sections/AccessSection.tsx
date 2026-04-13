@@ -84,6 +84,8 @@ export default function AccessSection() {
 
   const [step, setStep] = useState<StepId>('role')
   const [dir, setDir] = useState(1) // 1 = forward, -1 = back
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [data, setData] = useState<WizardData>({
     role: '', name: '', email: '', company: '',
     fleetSize: '', portCallsPerYear: '', currentPdaTool: '',
@@ -101,9 +103,23 @@ export default function AccessSection() {
     setStep(next)
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    go('done', 1)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Request failed')
+      go('done', 1)
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const focusStyle = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -481,19 +497,25 @@ export default function AccessSection() {
                       }}>
                         <ChevronLeft size={15} /> Back
                       </button>
-                      <button type="submit" style={{
+                      <button type="submit" disabled={submitting} style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                         background: 'var(--ds-primary)', color: 'var(--ds-primary-ink)',
                         borderRadius: 9999, padding: '12px 24px',
                         fontWeight: 600, fontSize: 15, border: 'none',
-                        cursor: 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
+                        cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
+                        opacity: submitting ? 0.7 : 1,
                       }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ds-primary-hover)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ds-primary)')}
+                        onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--ds-primary-hover)' }}
+                        onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--ds-primary)' }}
                       >
-                        Request access <ChevronRight size={15} />
+                        {submitting ? 'Sending...' : 'Request access'} {!submitting && <ChevronRight size={15} />}
                       </button>
                     </div>
+                    {submitError && (
+                      <p style={{ color: '#e53e3e', fontSize: 14, marginTop: 16, marginBottom: 0 }}>
+                        {submitError}
+                      </p>
+                    )}
                   </motion.form>
                 )}
               </AnimatePresence>

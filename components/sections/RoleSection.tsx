@@ -70,7 +70,6 @@ function RoleContent({ role }: { role: RoleKey }) {
   return (
     <div>
       <ContainerScroll
-        role={role}
         titleComponent={
           <div>
             <span

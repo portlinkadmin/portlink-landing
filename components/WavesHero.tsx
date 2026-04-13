@@ -82,6 +82,11 @@ export default function WavesHero() {
       canvas.height = rect.height * dpr
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
+      const needed = Math.ceil((rect.width * 1.1) / 4) + 2
+      if (needed > maxPoints) {
+        maxPoints = needed
+        pointsBuffer = new Float32Array(maxPoints * 2)
+      }
     }
 
     // Pause RAF when canvas scrolled off screen
@@ -135,13 +140,13 @@ export default function WavesHero() {
     canvas.addEventListener('mouseleave', handleMouseLeave)
 
     // Pre-allocated point array — reused each frame, zero GC pressure
-    const maxPoints = Math.ceil(2000 / 4) + 2 // max w=2000, step=4
-    const pointsBuffer: Float32Array = new Float32Array(maxPoints * 2) // x,y interleaved
+    let maxPoints = Math.ceil((window.innerWidth * 1.1) / 4) + 2
+    let pointsBuffer: Float32Array = new Float32Array(maxPoints * 2)
 
     const computeWavePoints = (wave: WaveConfig, w: number, h: number): number => {
       const baseY = h * 0.7
       let count = 0
-      for (let x = 0; x <= w; x += 4) {
+      for (let x = -4; x <= w + 4; x += 4) {
         let influence = 0
         const ripples = ripplesRef.current
         for (let r = 0; r < ripples.length; r++) {
