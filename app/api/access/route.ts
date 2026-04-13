@@ -33,8 +33,8 @@ function wrap(body: string): string {
 <tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0">
   <!-- Header bar -->
-  <tr><td style="background:#3d7daf;padding:28px 36px">
-    <span style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.01em">Portlink</span>
+  <tr><td style="padding:28px 36px;border-bottom:1px solid #e2e8f0">
+    <img src="https://portlink.app/portlink-logo.png" alt="Portlink" width="120" height="32" style="display:block;width:120px;height:auto;border:0" />
   </td></tr>
   <!-- Body -->
   <tr><td style="padding:36px 36px 40px">
