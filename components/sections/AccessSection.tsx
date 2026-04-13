@@ -72,9 +72,9 @@ const inputBase: React.CSSProperties = {
 // ── Pilot section (sits above the form) ───────────────────────────────────────
 
 const pilotPerks = [
-  { title: 'Early access',          body: 'Be among the first operators on the platform. Shape it before it ships to everyone else.', icon: Zap },
-  { title: 'Founding pricing',      body: 'Lock in rates that will not be available after public launch. Permanent.',                  icon: Tag },
-  { title: 'Hands-on onboarding',   body: 'Dedicated setup with our team. Not a help article.',                                      icon: HeadphonesIcon },
+  { title: 'Shape what gets built',       body: 'Pilot participants work directly with our team. Your operational reality drives the roadmap.', icon: Zap },
+  { title: 'Founding pricing, permanent', body: 'Lock in rates that will not be available after public launch. No promotional asterisk.',       icon: Tag },
+  { title: 'Onboarding that actually works', body: 'We set you up, migrate your existing data, and stay until your team is running. Not a help article.', icon: HeadphonesIcon },
 ]
 
 // ── Main component ────────────────────────────────────────────────────────────

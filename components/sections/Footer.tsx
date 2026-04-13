@@ -102,7 +102,7 @@ export default function Footer() {
         }}
       >
         <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-          © {new Date().getFullYear()} PortLink AS. All rights reserved.
+          © {new Date().getFullYear()} Portlink AS. All rights reserved.
         </p>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
           Made in Oslo, Norway

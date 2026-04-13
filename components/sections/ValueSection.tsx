@@ -4,28 +4,24 @@ import { useReveal } from '@/hooks/useReveal'
 
 const valueCards = [
   {
-    title: 'Real-time visibility',
-    body: 'Every stakeholder sees the same live status. No more calling to check if something happened.',
+    title: 'One record per port call',
+    body: 'Every stakeholder works from the same live object. No conflicting threads, no version confusion. Full history, always accessible.',
   },
   {
-    title: 'Single source of truth',
-    body: 'One workspace per port call. No conflicting spreadsheets, no outdated email threads.',
+    title: 'Deadlines that hold',
+    body: 'Booking cutoffs trigger automatic locks. The ship files a change request. You approve or deny. No more overbookings discovered at embarkation.',
   },
   {
-    title: 'Mobile-first',
-    body: 'Access port call data from anywhere — on the bridge, on the dock, or in the office.',
+    title: 'Edit approval, not silent drift',
+    body: 'When a cruise line updates your tour data, you get a notification and sign-off. Not a silent override you discover months later.',
   },
   {
     title: 'Role-based access',
-    body: 'Each stakeholder sees exactly what they need. Sensitive data stays where it belongs.',
+    body: 'The expedition guide sees the day programme. The itinerary planner sees the full booking chain. Finance sees the PDA trail. Everyone sees what they need.',
   },
   {
-    title: 'Operational analytics',
-    body: 'Track performance across port calls. Identify bottlenecks. Optimize operations over time.',
-  },
-  {
-    title: 'Structured communication',
-    body: 'Contextual messaging tied to port calls — not buried in generic email inboxes.',
+    title: 'Mobile access anywhere',
+    body: 'The quay, the bridge, the office. Whatever you\'re doing when something changes.',
   },
 ]
 
@@ -55,7 +51,7 @@ export default function ValueSection() {
               fontWeight: 500,
             }}
           >
-            The Platform
+            What changes
           </span>
           <h2
             className="reveal"
@@ -66,14 +62,8 @@ export default function ValueSection() {
               margin: '12px 0 16px',
             }}
           >
-            Built for how port calls actually work
+            The same team, the same ship, the same port, but next season you don't start from scratch.
           </h2>
-          <p
-            className="reveal"
-            style={{ fontSize: '16px', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}
-          >
-            Not another generic tool. Portlink is purpose-built for the maritime coordination challenge.
-          </p>
         </div>
 
         <div

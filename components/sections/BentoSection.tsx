@@ -232,19 +232,19 @@ const bentoData: Record<string, BentoItem[]> = {
   cruise: [
     {
       title: 'Full Fleet Visibility',
-      description: 'See every port call across your entire deployment schedule in one live view.',
+      description: 'Every port call, every deployment, one live view. Not a spreadsheet you update by hand.',
       visual: <FleetTimeline />,
       span: 'two-thirds',
     },
     {
       title: 'From Request to Confirmed',
-      description: 'Send port booking requests and receive structured confirmations — no email chains.',
+      description: 'Berth request sent. Agent confirmed. Documented in the same place, without an email thread.',
       visual: <StatusFlow />,
       accent: true,
     },
     {
       title: 'PDA Control at Scale',
-      description: 'Review and approve Proforma Disbursement Accounts from all ports in a standardised format.',
+      description: 'PDAs submitted in a standard format. You review once. No chasing agents for attachments.',
       visual: <CostCard />,
     },
     {
@@ -257,24 +257,24 @@ const bentoData: Record<string, BentoItem[]> = {
   agent: [
     {
       title: 'All Calls, One Inbox',
-      description: 'Receive and manage port booking requests from multiple cruise lines in a single workspace.',
+      description: 'Every inbound call from every cruise line in one place. Not separate portal logins.',
       visual: <NotificationStream />,
       span: 'two-thirds',
     },
     {
       title: 'Digital PDA Workflow',
-      description: 'Build, submit, and track Proforma Disbursement Accounts without spreadsheets or email.',
+      description: 'Build the pro-forma, submit it, track the gap to final, in one workflow, without the spreadsheet.',
       visual: <DocumentCard />,
       accent: true,
     },
     {
       title: 'Your Network, Protected',
-      description: 'Portlink surfaces your relationships — cruise lines connect with you directly, not around you.',
+      description: 'Portlink surfaces your relationships. Cruise lines connect with you directly, not around you.',
       visual: <NetworkDiagram />,
     },
     {
       title: 'Port Call Timeline',
-      description: 'Stay on top of every arriving vessel with structured schedules, documents, and status updates.',
+      description: 'Vessel status, documents, and open tasks on a single timeline. The captain sees it. You see it. Everybody sees it.',
       visual: <VesselList />,
       span: 'two-thirds',
     },
@@ -282,19 +282,19 @@ const bentoData: Record<string, BentoItem[]> = {
   tour: [
     {
       title: 'Demand You Can Plan Around',
-      description: 'See confirmed port calls early enough to prepare capacity, staffing, and pricing.',
+      description: 'Confirmed calls, months out. Plan staffing and pricing before the season starts.',
       visual: <CalendarView />,
       span: 'two-thirds',
     },
     {
       title: 'Structured Shore Requests',
-      description: 'Receive and respond to shore excursion briefs in a consistent format — not scattered emails.',
+      description: "Every brief arrives in the same format. You respond once. It's on the record.",
       visual: <ShoreRequestCard />,
       accent: true,
     },
     {
       title: 'Known and Trusted',
-      description: 'Your profile and track record travel with every port call request — no cold introductions.',
+      description: 'Your profile and track record travel with every port call request, no cold introductions.',
       visual: <NetworkDiagram />,
     },
     {

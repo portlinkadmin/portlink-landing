@@ -17,17 +17,17 @@ const itemVariants = {
 }
 
 const headlines: Record<Persona, string> = {
-  all: 'One platform for every port call',
-  cruise: 'Your fleet. Every port. One platform.',
-  agent: 'Every vessel arrival. Fully organized.',
-  tour: 'List once. Coordinate automatically.',
+  all: 'Port calls run on emails, spreadsheets, and phone calls. They shouldn\'t have to.',
+  cruise: 'Your deployment changes. Your port prep shouldn\'t.',
+  agent: 'You enter the same data 15 times. For every cruise line. Every port.',
+  tour: 'You find out about the overbooking at the quay.',
 }
 
 const subheadlines: Record<Persona, string> = {
-  all: 'Cruise lines, port agents, and tour operators — finally connected in one shared workspace.',
-  cruise: 'Real-time visibility across every port call, every stakeholder, every change.',
-  agent: 'Manage vessel arrivals, services, and shore excursions from one hub.',
-  tour: 'Your excursions listed, booked, and coordinated — without the email chaos.',
+  all: 'Portlink connects cruise lines, port agents, and tour operators on a single port call record. Everyone sees the same status. Nobody re-enters the same data.',
+  cruise: 'One dashboard for every port call across your deployment. Status, agents, PDA, shore programmes, without chasing anyone.',
+  agent: 'Portlink replaces the copy-paste, the conflicting links, and the emails you can\'t find. One workspace per port call, one login with full history.',
+  tour: 'Portlink enforces booking deadlines automatically, syncs your tour data once across every cruise line format, and keeps your programme from being edited without your approval.',
 }
 
 type HeroSectionProps = {
@@ -82,7 +82,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
             border: '1px solid var(--border)',
           }}
         >
-          The Port Call Platform
+          Port call coordination
         </motion.span>
 
         {/* H1 — 2x size, tight tracking */}

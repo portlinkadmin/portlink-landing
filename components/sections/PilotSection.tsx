@@ -7,33 +7,33 @@ import type { Persona } from '@/app/page'
 const pilotCards = [
   {
     icon: Rocket,
-    title: 'Early access',
-    body: 'Be among the first to use Portlink. Shape the product with direct feedback to our team.',
+    title: 'Shape what gets built',
+    body: "Pilot participants work directly with our team. Your operational reality drives the roadmap, not a feature backlog written by people who've never done a port call.",
   },
   {
     icon: DollarSign,
-    title: 'Founding pricing',
-    body: 'Pilot participants lock in founding-member pricing — permanently. No price increases, ever.',
+    title: 'Founding pricing, permanent',
+    body: 'Pilot participants lock in pricing that will not be available at public launch. No promotional asterisk.',
   },
   {
     icon: Users,
-    title: 'White-glove onboarding',
-    body: 'Dedicated onboarding support. We help you set up, migrate, and get your team running.',
+    title: 'Onboarding that actually works',
+    body: 'We set you up, migrate your existing data, and stay until your team is running. Not a help article.',
   },
 ]
 
 const pilotHeadlines: Record<string, string> = {
-  all: 'Join the pilot program',
-  cruise: 'Get your fleet on Portlink first',
-  agent: 'Modernize your port operations',
-  tour: 'List your excursions before anyone else',
+  all: "We're running a pilot programme with a small number of operators.",
+  cruise: 'Be among the first cruise lines in the pilot',
+  agent: 'Join as a founding port agent',
+  tour: 'Lock in founding operator pricing',
 }
 
 const pilotDescs: Record<string, string> = {
-  all: 'Limited spots available for cruise lines, port agents, and tour operators ready to leave email and spreadsheets behind.',
-  cruise: "We're onboarding a select number of cruise lines to our pilot program. Get fleet-wide visibility before your competitors.",
-  agent: 'Join a small group of forward-thinking port agents who want to run operations from a modern platform.',
-  tour: 'Be the first tour operators on the platform. Get discovered by cruise lines from day one.',
+  all: 'The first group of operators will shape what Portlink becomes. Your operational reality drives the roadmap.',
+  cruise: 'Shape what gets built. Pilot participants work directly with our team.',
+  agent: "Shape what gets built. Your operational reality drives the roadmap, not a feature backlog written by people who've never done a port call.",
+  tour: 'Shape what gets built. Pilot participants work directly with our team. Your operational reality drives the roadmap.',
 }
 
 export default function PilotSection({ persona }: { persona: Persona }) {
@@ -63,7 +63,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
             marginBottom: '20px',
           }}
         >
-          Pilot Program · Limited Availability
+          Early access
         </span>
 
         <h2

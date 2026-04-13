@@ -76,7 +76,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
           margin: '0 0 clamp(16px, 3vh, 28px)',
         }}
       >
-        What best describes you?
+        Choose your view
       </motion.h2>
 
       {/* Role cards */}

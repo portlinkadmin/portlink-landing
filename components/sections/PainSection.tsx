@@ -4,28 +4,28 @@ import { useReveal } from '@/hooks/useReveal'
 
 const painCards = [
   {
-    title: 'Email overload',
-    body: "Critical updates buried in email threads. Version control through 'Final_v3_REAL.xlsx' attachments.",
+    title: "It's buried in email",
+    body: 'The confirmation you need is somewhere in a thread from three weeks ago. Between three cruise lines, six agents, and a time zone gap.',
   },
   {
-    title: 'Spreadsheet chaos',
-    body: 'Multiple conflicting spreadsheets for the same port call. Nobody knows which version is current.',
+    title: 'Final_v3_REAL.xlsx is the source of truth',
+    body: 'Multiple people are editing different versions. Nobody knows which is current until someone finds the error.',
   },
   {
-    title: 'Phone tag',
-    body: 'Last-minute changes communicated by phone. No paper trail, no confirmation, no accountability.',
+    title: 'Last-minute changes by phone',
+    body: "No paper trail, no confirmation, no accountability. The change happened, but nobody can prove what was agreed.",
   },
   {
-    title: 'Time zone friction',
-    body: 'Coordinating across time zones means waiting hours for confirmations that should be instant.',
+    title: 'Waiting hours for a yes or no',
+    body: 'Confirmation that should take five minutes takes a day when your agent is in Genoa and your operations team is in Miami.',
   },
   {
-    title: 'Zero visibility',
-    body: "Ship operators can't see ground preparations. Agents can't see schedule changes. Tour operators fly blind.",
+    title: "Nobody sees what everyone else is doing",
+    body: "The ship operator doesn't see port prep. The agent doesn't see schedule changes. The tour operator books capacity nobody told them was cancelled.",
   },
   {
-    title: 'Costly errors',
-    body: "Missed bookings, wrong passenger counts, delayed services. All because information didn't flow.",
+    title: 'Mistakes found at the quay',
+    body: 'Wrong passenger count for the helicopter. Wrong departure time on the briefing sheet. Right there, in front of the guests.',
   },
 ]
 
@@ -55,7 +55,7 @@ export default function PainSection() {
               fontWeight: 500,
             }}
           >
-            The Problem
+            The current state
           </span>
           <h2
             className="reveal"
@@ -66,15 +66,8 @@ export default function PainSection() {
               margin: '12px 0 16px',
             }}
           >
-            Port calls run on chaos
+            Nobody designed it this way. It just ended up like this.
           </h2>
-          <p
-            className="reveal"
-            style={{ fontSize: '16px', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}
-          >
-            Every port call involves 17+ stakeholders, hundreds of emails, and a web of spreadsheets.
-            The result? Delays, errors, and zero visibility.
-          </p>
         </div>
 
         <div

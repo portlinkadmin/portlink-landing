@@ -1,63 +1,63 @@
 'use client'
 
-import { Anchor, Compass, Ship, MapPin } from 'lucide-react'
+import { Anchor, Compass, Ship } from 'lucide-react'
 import { motion } from 'framer-motion'
 import type { Persona } from '@/app/page'
 
 type RoleKey = 'cruise' | 'agent' | 'tour'
 
 interface PartnerCard {
-  icon: typeof Anchor | typeof Ship | typeof Compass | typeof MapPin
+  icon: typeof Anchor | typeof Ship | typeof Compass
   title: string
   body: string
 }
 
 const ecosystemData: Record<RoleKey, { headline: string; desc: string; partners: PartnerCard[] }> = {
   cruise: {
-    headline: 'Your ecosystem, connected',
-    desc: 'Portlink connects your fleet operations with the local stakeholders who make port calls happen.',
+    headline: 'Your fleet, connected',
+    desc: 'Port agents and tour operators on Portlink receive your requirements directly, confirm readiness in a shared workspace, and flag issues before they become surprises at the quay.',
     partners: [
       {
         icon: Anchor,
         title: 'Port Agents',
-        body: 'Direct coordination channel with local agents. See their preparation status, share requirements, confirm services — all in real time.',
+        body: 'Receive structured requirements, confirm readiness, and flag issues through one shared channel. No email chains.',
       },
       {
         icon: Compass,
         title: 'Tour Operators',
-        body: 'Browse available shore excursions, manage bookings, and get automatic updates on capacity and schedule changes.',
+        body: 'Tour operators manage their own bookings inside Portlink, giving you oversight without the admin burden.',
       },
     ],
   },
   agent: {
-    headline: 'Connected to the vessels you serve',
-    desc: 'Portlink puts you in direct communication with cruise line operations teams — no more email chains.',
+    headline: 'Connected to every cruise line you serve',
+    desc: 'Receive structured requirements, submit PDAs, and communicate changes through one platform. No separate portals, no duplicate data entry.',
     partners: [
       {
         icon: Ship,
         title: 'Cruise Line Ops',
-        body: 'Receive structured requirements directly. Confirm readiness, flag issues, and communicate changes through a single shared channel.',
+        body: 'Cruise line ops push itineraries and manifest updates directly into Portlink. No more email attachments, no more manual entry.',
       },
       {
-        icon: MapPin,
-        title: 'Port Authorities',
-        body: 'Coordinate berth bookings and port state control requirements with live status updates visible to all stakeholders.',
+        icon: Compass,
+        title: 'Tour Operators',
+        body: 'Tour operators handle their own bookings and logistics inside Portlink. You get visibility without playing middleman.',
       },
     ],
   },
   tour: {
-    headline: 'Plugged into the cruise calendar',
-    desc: 'See vessel arrivals, manage capacity, and receive bookings automatically — all synced to live cruise schedules.',
+    headline: 'Connected to the cruise calendar',
+    desc: 'See confirmed port calls early enough to prepare capacity. Receive booking briefs in a consistent format. Manage changes through one channel that every side can see.',
     partners: [
       {
         icon: Ship,
         title: 'Cruise Lines',
-        body: 'Get discovered by cruise shore excursion managers. Receive booking requests, confirm availability, and manage changes in one place.',
+        body: 'Portlink pulls schedule and manifest data directly from cruise line ops so your booking counts and timing are always accurate.',
       },
       {
         icon: Anchor,
         title: 'Port Agents',
-        body: 'Coordinate local logistics with port agents who are already on Portlink — no duplicate communication.',
+        body: 'Portlink keeps port agents in the loop on your tours. Pickup timing, passenger counts, and logistics flow automatically.',
       },
     ],
   },
