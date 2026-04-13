@@ -9,7 +9,7 @@ import type { Persona } from '@/app/page'
 
 function StatusFlow() {
   const steps = ['Pending', 'Reviewing', 'Confirmed']
-  const colors = ['var(--ds-text-3)', 'var(--ds-primary)', '#22c55e']
+  const colors = ['rgba(255,255,255,0.6)', 'rgba(255,255,255,0.85)', '#22c55e']
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
       {steps.map((s, i) => (
@@ -17,7 +17,7 @@ function StatusFlow() {
           <div style={{
             padding: '4px 8px',
             borderRadius: 9999,
-            background: i === 2 ? 'rgba(34,197,94,0.12)' : i === 1 ? 'rgba(61,125,175,0.15)' : 'var(--ds-surface-2)',
+            background: i === 2 ? 'rgba(34,197,94,0.15)' : i === 1 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)',
             border: `1px solid ${colors[i]}`,
             fontSize: 11,
             fontWeight: 600,
@@ -25,7 +25,7 @@ function StatusFlow() {
           }}>
             {s}
           </div>
-          {i < 2 && <div style={{ width: 12, height: 1, background: 'var(--ds-border-1)', flexShrink: 0 }} />}
+          {i < 2 && <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />}
         </div>
       ))}
     </div>
@@ -103,18 +103,18 @@ function NotificationStream() {
 function DocumentCard() {
   return (
     <div style={{
-      background: 'var(--ds-surface-2)', border: '1px solid var(--ds-border-1)',
+      background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
       borderRadius: 10, padding: '8px 12px', width: '100%', maxWidth: 200,
     }}>
-      <div style={{ fontSize: 10, color: 'var(--ds-text-3)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PDA Draft</div>
+      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PDA Draft</div>
       {['Port dues', 'Pilotage', 'Agency fee', 'Total'].map((l, i) => (
         <div key={l} style={{
           display: 'flex', justifyContent: 'space-between',
           padding: '2px 0',
-          borderTop: i === 3 ? '1px solid var(--ds-border-1)' : 'none',
+          borderTop: i === 3 ? '1px solid rgba(255,255,255,0.15)' : 'none',
           marginTop: i === 3 ? 4 : 0,
           fontSize: 11,
-          color: i === 3 ? 'var(--ds-text-1)' : 'var(--ds-text-3)',
+          color: i === 3 ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.6)',
           fontWeight: i === 3 ? 600 : 400,
         }}>
           <span>{l}</span>
@@ -190,14 +190,14 @@ function CalendarView() {
 function ShoreRequestCard() {
   return (
     <div style={{
-      background: 'var(--ds-surface-2)', border: '1px solid var(--ds-border-1)',
+      background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
       borderRadius: 10, padding: '8px 12px', maxWidth: 220,
     }}>
-      <div style={{ fontSize: 10, color: 'var(--ds-text-3)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Shore Request</div>
+      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Shore Request</div>
       {[['Port', 'Barcelona'], ['Pax', '3,200'], ['Date', 'Apr 14']].map(([l, v]) => (
         <div key={l} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, padding: '2px 0' }}>
-          <span style={{ color: 'var(--ds-text-3)' }}>{l}</span>
-          <span style={{ color: 'var(--ds-text-1)', fontWeight: 600 }}>{v}</span>
+          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{l}</span>
+          <span style={{ color: 'rgba(255,255,255,0.95)', fontWeight: 600 }}>{v}</span>
         </div>
       ))}
     </div>
