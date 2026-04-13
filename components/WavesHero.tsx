@@ -129,6 +129,10 @@ export default function WavesHero() {
       mousePosRef.current = null
     }
 
+    // Pre-allocated point array — reused each frame, zero GC pressure
+    let maxPoints = Math.ceil((window.innerWidth * 1.1) / 4) + 2
+    let pointsBuffer: Float32Array = new Float32Array(maxPoints * 2)
+
     resize()
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(canvas)
@@ -138,10 +142,6 @@ export default function WavesHero() {
     window.addEventListener('touchmove', handleTouchMove, { passive: true })
     window.addEventListener('touchend', handleTouchEnd, { passive: true })
     canvas.addEventListener('mouseleave', handleMouseLeave)
-
-    // Pre-allocated point array — reused each frame, zero GC pressure
-    let maxPoints = Math.ceil((window.innerWidth * 1.1) / 4) + 2
-    let pointsBuffer: Float32Array = new Float32Array(maxPoints * 2)
 
     const computeWavePoints = (wave: WaveConfig, w: number, h: number): number => {
       const baseY = h * 0.7
