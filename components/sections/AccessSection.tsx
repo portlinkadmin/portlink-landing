@@ -72,9 +72,9 @@ const inputBase: React.CSSProperties = {
 // ── Pilot section (sits above the form) ───────────────────────────────────────
 
 const pilotPerks = [
-  { title: 'Early access',          body: 'Be among the first fleets on the platform before public launch.', icon: Zap },
-  { title: 'Founding pricing',      body: 'Lock in rates that will never be available again.',                icon: Tag },
-  { title: 'White-glove onboarding', body: 'Dedicated setup with our team — not a help article.',            icon: HeadphonesIcon },
+  { title: 'Early access',          body: 'Be among the first operators on the platform. Shape it before it ships to everyone else.', icon: Zap },
+  { title: 'Founding pricing',      body: 'Lock in rates that will not be available after public launch. Permanent.',                  icon: Tag },
+  { title: 'Hands-on onboarding',   body: 'Dedicated setup with our team. Not a help article.',                                      icon: HeadphonesIcon },
 ]
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -152,16 +152,16 @@ export default function AccessSection() {
             fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.12em',
             color: 'var(--ds-primary-hover)', fontWeight: 600,
           }}>
-            Founding fleet program
+            Request access
           </span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700,
             color: 'var(--ds-text-1)', margin: '14px 0 16px',
           }}>
-            Get your fleet on Portlink first
+            We are selective about our first cohort.
           </h2>
           <p style={{ fontSize: '17px', color: 'var(--ds-text-2)', lineHeight: 1.65, marginBottom: '48px', maxWidth: '560px', margin: '0 auto 48px' }}>
-            We&apos;re onboarding a small group of cruise operators for our Q3 2025 pilot. Limited spots. No obligation.
+            We are not taking everyone. The first group will shape what Portlink becomes, so we are looking for teams with complex operations, a low tolerance for manual work, and opinions about what is broken.
           </p>
           <div style={{
             display: 'grid',
@@ -219,10 +219,13 @@ export default function AccessSection() {
             >
               <CheckCircle size={52} color="var(--ds-primary)" style={{ display: 'block', margin: '0 auto 20px' }} />
               <h3 style={{ fontSize: '26px', fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 12 }}>
-                You&apos;re in the queue
+                We got your request.
               </h3>
-              <p style={{ fontSize: '16px', color: 'var(--ds-text-2)', lineHeight: 1.65 }}>
-                We&apos;ll review your application and get back to <strong style={{ color: 'var(--ds-text-1)' }}>{data.email}</strong> within 48 hours.
+              <p style={{ fontSize: '16px', color: 'var(--ds-text-2)', lineHeight: 1.65, marginBottom: 8 }}>
+                We have sent a confirmation to <strong style={{ color: 'var(--ds-text-1)' }}>{data.email}</strong>. Our team will review your application and get back to you within 48 hours.
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--ds-text-3)', lineHeight: 1.55 }}>
+                Check your spam folder if you do not see it.
               </p>
             </motion.div>
           ) : (
@@ -264,10 +267,10 @@ export default function AccessSection() {
                     transition={stepTransition}
                   >
                     <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 8 }}>
-                      Who are you?
+                      What is your role?
                     </h3>
                     <p style={{ fontSize: 15, color: 'var(--ds-text-2)', marginBottom: 28, lineHeight: 1.5 }}>
-                      We tailor the onboarding to your role.
+                      We tailor the pilot to your operation.
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                       {roleOptions.map((opt) => {
@@ -487,13 +490,20 @@ export default function AccessSection() {
                       </div>
                     </div>
 
+                    {submitError && (
+                      <p style={{ color: '#e53e3e', fontSize: 14, marginTop: 16, marginBottom: 0 }}>
+                        {submitError}
+                      </p>
+                    )}
+
                     <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
-                      <button type="button" onClick={() => go('identity', -1)} style={{
+                      <button type="button" onClick={() => go('identity', -1)} disabled={submitting} style={{
                         display: 'flex', alignItems: 'center', gap: 6,
                         background: 'transparent', border: '1px solid var(--ds-border-1)',
                         color: 'var(--ds-text-2)', borderRadius: 9999,
                         padding: '12px 20px', cursor: 'pointer', fontFamily: 'inherit',
                         fontSize: 14, fontWeight: 500, transition: 'border-color 0.2s',
+                        opacity: submitting ? 0.5 : 1,
                       }}>
                         <ChevronLeft size={15} /> Back
                       </button>
@@ -511,11 +521,6 @@ export default function AccessSection() {
                         {submitting ? 'Sending...' : 'Request access'} {!submitting && <ChevronRight size={15} />}
                       </button>
                     </div>
-                    {submitError && (
-                      <p style={{ color: '#e53e3e', fontSize: 14, marginTop: 16, marginBottom: 0 }}>
-                        {submitError}
-                      </p>
-                    )}
                   </motion.form>
                 )}
               </AnimatePresence>
