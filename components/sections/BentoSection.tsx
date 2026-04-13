@@ -9,7 +9,7 @@ import type { Persona } from '@/app/page'
 
 function StatusFlow() {
   const steps = ['Pending', 'Reviewing', 'Confirmed']
-  const colors = ['rgba(255,255,255,0.6)', 'rgba(255,255,255,0.85)', '#22c55e']
+  const colors = ['var(--text-muted)', 'var(--text-secondary)', 'var(--success)']
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
       {steps.map((s, i) => (
@@ -17,7 +17,7 @@ function StatusFlow() {
           <div style={{
             padding: '4px 8px',
             borderRadius: 9999,
-            background: i === 2 ? 'rgba(34,197,94,0.15)' : i === 1 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)',
+            background: i === 2 ? 'rgba(74,124,78,0.1)' : 'var(--bg)',
             border: `1px solid ${colors[i]}`,
             fontSize: 11,
             fontWeight: 600,
@@ -25,7 +25,7 @@ function StatusFlow() {
           }}>
             {s}
           </div>
-          {i < 2 && <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />}
+          {i < 2 && <div style={{ width: 12, height: 1, background: 'var(--border)', flexShrink: 0 }} />}
         </div>
       ))}
     </div>
@@ -40,11 +40,11 @@ function FleetTimeline() {
         <div key={p} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flex: '1 1 0', minWidth: 0 }}>
           <div style={{
             width: '100%', maxWidth: 28, height: `${22 + i * 4}px`,
-            background: i === 2 ? 'var(--ds-primary)' : 'var(--ds-surface-2)',
-            border: '1px solid var(--ds-border-1)',
+            background: i === 2 ? 'var(--brand)' : 'var(--surface)',
+            border: '1px solid var(--border)',
             borderRadius: 4,
           }} />
-          <span style={{ fontSize: 9, color: 'var(--ds-text-3)', fontWeight: 600 }}>{p}</span>
+          <span style={{ fontSize: 9, color: 'var(--text-muted)', fontWeight: 600 }}>{p}</span>
         </div>
       ))}
     </div>
@@ -56,9 +56,9 @@ function CostCard() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4, width: '100%', maxWidth: 200 }}>
       {items.map(item => (
-        <div key={item.l} style={{ display: 'flex', justifyContent: 'space-between', padding: '3px 8px', background: 'var(--ds-surface-2)', borderRadius: 6, fontSize: 11 }}>
-          <span style={{ color: 'var(--ds-text-3)' }}>{item.l}</span>
-          <span style={{ color: 'var(--ds-text-1)', fontWeight: 600 }}>{item.v}</span>
+        <div key={item.l} style={{ display: 'flex', justifyContent: 'space-between', padding: '3px 8px', background: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
+          <span style={{ color: 'var(--text-muted)' }}>{item.l}</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{item.v}</span>
         </div>
       ))}
     </div>
@@ -71,9 +71,9 @@ function PortGrid() {
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
       {ports.map(p => (
         <div key={p} style={{
-          padding: '4px 8px', background: 'var(--ds-surface-2)',
-          border: '1px solid var(--ds-border-1)', borderRadius: 6,
-          fontSize: 11, color: 'var(--ds-text-2)', fontWeight: 500, textAlign: 'center',
+          padding: '4px 8px', background: 'var(--surface)',
+          border: '1px solid var(--border)', borderRadius: 6,
+          fontSize: 11, color: 'var(--text-secondary)', fontWeight: 500, textAlign: 'center',
         }}>{p}</div>
       ))}
     </div>
@@ -88,11 +88,11 @@ function NotificationStream() {
         <div key={item} style={{
           display: 'flex', alignItems: 'center', gap: 8,
           padding: '4px 10px', borderRadius: 8,
-          background: i === 0 ? 'rgba(61,125,175,0.12)' : 'var(--ds-surface-2)',
-          border: `1px solid ${i === 0 ? 'var(--ds-primary)' : 'var(--ds-border-1)'}`,
-          fontSize: 11, color: 'var(--ds-text-2)',
+          background: i === 0 ? 'var(--brand-faint)' : 'var(--surface)',
+          border: `1px solid ${i === 0 ? 'var(--brand)' : 'var(--border)'}`,
+          fontSize: 11, color: 'var(--text-secondary)',
         }}>
-          <Anchor size={10} color="var(--ds-primary)" style={{ flexShrink: 0 }} />
+          <Anchor size={10} color="var(--brand)" style={{ flexShrink: 0 }} />
           {item}
         </div>
       ))}
@@ -103,18 +103,18 @@ function NotificationStream() {
 function DocumentCard() {
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
+      background: 'var(--bg)', border: '1px solid var(--border)',
       borderRadius: 10, padding: '8px 12px', width: '100%', maxWidth: 200,
     }}>
-      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PDA Draft</div>
+      <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PDA Draft</div>
       {['Port dues', 'Pilotage', 'Agency fee', 'Total'].map((l, i) => (
         <div key={l} style={{
           display: 'flex', justifyContent: 'space-between',
           padding: '2px 0',
-          borderTop: i === 3 ? '1px solid rgba(255,255,255,0.15)' : 'none',
+          borderTop: i === 3 ? '1px solid var(--border)' : 'none',
           marginTop: i === 3 ? 4 : 0,
           fontSize: 11,
-          color: i === 3 ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.6)',
+          color: i === 3 ? 'var(--text-primary)' : 'var(--text-muted)',
           fontWeight: i === 3 ? 600 : 400,
         }}>
           <span>{l}</span>
@@ -133,16 +133,16 @@ function NetworkDiagram() {
           <div style={{ textAlign: 'center' }}>
             <div style={{
               width: 36, height: 36, borderRadius: '50%',
-              background: i === 1 ? 'var(--ds-primary)' : 'var(--ds-surface-2)',
-              border: `1px solid ${i === 1 ? 'transparent' : 'var(--ds-border-1)'}`,
+              background: i === 1 ? 'var(--brand)' : 'var(--surface)',
+              border: `1px solid ${i === 1 ? 'transparent' : 'var(--border)'}`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 4px',
             }}>
-              <Anchor size={14} color={i === 1 ? 'white' : 'var(--ds-text-3)'} />
+              <Anchor size={14} color={i === 1 ? 'white' : 'var(--text-muted)'} />
             </div>
-            <span style={{ fontSize: 10, color: 'var(--ds-text-3)' }}>{label}</span>
+            <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{label}</span>
           </div>
-          {i < 2 && <div style={{ width: 20, height: 1, background: 'var(--ds-primary)', opacity: 0.5 }} />}
+          {i < 2 && <div style={{ width: 20, height: 1, background: 'var(--brand)', opacity: 0.5 }} />}
         </div>
       ))}
     </div>
@@ -156,11 +156,11 @@ function VesselList() {
       {vessels.map(v => (
         <div key={v.name} style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          padding: '5px 10px', background: 'var(--ds-surface-2)',
-          border: '1px solid var(--ds-border-1)', borderRadius: 8,
+          padding: '5px 10px', background: 'var(--surface)',
+          border: '1px solid var(--border)', borderRadius: 8,
         }}>
-          <span style={{ fontSize: 11, color: 'var(--ds-text-1)', fontWeight: 500 }}>{v.name}</span>
-          <span style={{ fontSize: 10, color: 'var(--ds-text-3)' }}>{v.eta}</span>
+          <span style={{ fontSize: 11, color: 'var(--text-primary)', fontWeight: 500 }}>{v.name}</span>
+          <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{v.eta}</span>
         </div>
       ))}
     </div>
@@ -175,12 +175,12 @@ function CalendarView() {
       {days.map((d, i) => (
         <div key={i} style={{
           width: 28, height: 36, borderRadius: 6,
-          background: active.includes(i) ? 'rgba(61,125,175,0.15)' : 'var(--ds-surface-2)',
-          border: `1px solid ${active.includes(i) ? 'var(--ds-primary)' : 'var(--ds-border-1)'}`,
+          background: active.includes(i) ? 'var(--brand-faint)' : 'var(--surface)',
+          border: `1px solid ${active.includes(i) ? 'var(--brand)' : 'var(--border)'}`,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2,
         }}>
-          <span style={{ fontSize: 9, color: active.includes(i) ? 'var(--ds-primary)' : 'var(--ds-text-3)', fontWeight: 600 }}>{d}</span>
-          {active.includes(i) && <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--ds-primary)' }} />}
+          <span style={{ fontSize: 9, color: active.includes(i) ? 'var(--brand)' : 'var(--text-muted)', fontWeight: 600 }}>{d}</span>
+          {active.includes(i) && <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--brand)' }} />}
         </div>
       ))}
     </div>
@@ -190,14 +190,14 @@ function CalendarView() {
 function ShoreRequestCard() {
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
+      background: 'var(--bg)', border: '1px solid var(--border)',
       borderRadius: 10, padding: '8px 12px', maxWidth: 220,
     }}>
-      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Shore Request</div>
+      <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Shore Request</div>
       {[['Port', 'Barcelona'], ['Pax', '3,200'], ['Date', 'Apr 14']].map(([l, v]) => (
         <div key={l} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, padding: '2px 0' }}>
-          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{l}</span>
-          <span style={{ color: 'rgba(255,255,255,0.95)', fontWeight: 600 }}>{v}</span>
+          <span style={{ color: 'var(--text-muted)' }}>{l}</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{v}</span>
         </div>
       ))}
     </div>
@@ -210,8 +210,8 @@ function AuditTrail() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       {steps.map((s, i) => (
         <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <CheckCircle2 size={14} color={i < 2 ? '#22c55e' : 'var(--ds-border-1)'} />
-          <span style={{ fontSize: 12, color: i < 2 ? 'var(--ds-text-1)' : 'var(--ds-text-3)', fontWeight: i < 2 ? 500 : 400 }}>{s}</span>
+          <CheckCircle2 size={14} color={i < 2 ? '#22c55e' : 'var(--border)'} />
+          <span style={{ fontSize: 12, color: i < 2 ? 'var(--text-primary)' : 'var(--text-muted)', fontWeight: i < 2 ? 500 : 400 }}>{s}</span>
         </div>
       ))}
     </div>
@@ -319,7 +319,7 @@ export default function BentoSection({ persona }: BentoSectionProps) {
   if (!cards) return null
 
   return (
-    <section style={{ background: 'var(--ds-canvas)', padding: '80px 24px' }}>
+    <section style={{ background: 'var(--bg)', padding: '80px 24px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -330,14 +330,14 @@ export default function BentoSection({ persona }: BentoSectionProps) {
         >
           <span style={{
             fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.12em',
-            color: 'var(--ds-primary-hover)', fontWeight: 600,
+            color: 'var(--text-muted)', fontWeight: 600,
           }}>
             Platform features
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
             fontWeight: 700,
-            color: 'var(--ds-text-1)',
+            color: 'var(--text-primary)',
             margin: '12px 0 0',
           }}>
             Built for your workflow

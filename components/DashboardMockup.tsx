@@ -2,47 +2,57 @@
 
 import { Anchor, Bell, ChevronDown, Search } from 'lucide-react'
 
-const shimmerKeyframes = `@keyframes skel-shimmer{0%{opacity:.55}50%{opacity:.85}100%{opacity:.55}}`
+const mono = 'var(--font-mono, "JetBrains Mono", monospace)'
 
-function B({ w = '100%', h = 10, r = 5, mb = 0, accent = false }: { w?: string | number; h?: number; r?: number; mb?: number; accent?: boolean }) {
-  return (
-    <div style={{
-      width: w, height: h, borderRadius: r, marginBottom: mb,
-      background: accent ? 'rgba(61,125,175,0.18)' : '#e4eaf0',
-      animation: 'skel-shimmer 2s ease-in-out infinite',
-    }} />
-  )
+const vessels = [
+  { name: 'MV NORDIC STAR',   port: 'NLRTM', eta: '14:32 UTC', status: 'live',     pax: '3,842' },
+  { name: 'MSC GRANDIOSA',    port: 'ESBCN', eta: '08:00 UTC', status: 'live',     pax: '5,686' },
+  { name: 'COSTA FORTUNA',    port: 'ITCVV', eta: '14:30 UTC', status: 'delayed',  pax: '2,720' },
+  { name: 'CELEBRITY EDGE',   port: 'GRPIR', eta: '07:00 UTC', status: 'on-time',  pax: '2,908' },
+  { name: 'NORWEGIAN BLISS',  port: 'FRMRS', eta: '11:00 UTC', status: 'on-time',  pax: '4,004' },
+  { name: 'QUEEN MARY 2',     port: 'GBSOU', eta: '09:00 UTC', status: 'pending',  pax: '2,691' },
+  { name: 'HARMONY OF SEAS',  port: 'USMIA', eta: '06:30 UTC', status: 'on-time',  pax: '5,479' },
+  { name: 'MEIN SCHIFF 3',    port: 'DEHAM', eta: '16:00 UTC', status: 'pending',  pax: '2,506' },
+]
+
+const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
+  'live':     { label: 'IN PORT',     color: 'var(--accent-bright, #3FA8A4)', bg: 'rgba(45, 125, 122, 0.1)' },
+  'on-time':  { label: 'ON TIME',     color: 'var(--success, #4A7C4E)',       bg: 'rgba(74, 124, 78, 0.1)' },
+  'delayed':  { label: 'DELAYED +2h', color: 'var(--warning, #B8844A)',       bg: 'rgba(184, 132, 74, 0.1)' },
+  'pending':  { label: 'PENDING',     color: '#9A8F82',                       bg: 'rgba(154, 143, 130, 0.08)' },
 }
 
 function TopBar() {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      padding: '10px 16px', background: '#ffffff', borderBottom: '1px solid #e8eef4', gap: 12,
+      padding: '10px 16px', background: '#FAF7F2', borderBottom: '1px solid #E8E2D8', gap: 12,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
         <div style={{
           width: 28, height: 28, borderRadius: 8,
-          background: 'linear-gradient(135deg, #3d7daf, #295c85)',
+          background: '#1a5e6b',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}><Anchor size={14} color="white" /></div>
-        <span style={{ fontSize: 13, fontWeight: 700, color: '#0b1220' }}>Portlink</span>
+        }}>
+          <Anchor size={14} color="white" />
+        </div>
+        <span style={{ fontSize: 13, fontWeight: 700, color: '#1A1613' }}>Portlink</span>
       </div>
       <div style={{
         flex: 1, maxWidth: 280,
         display: 'flex', alignItems: 'center', gap: 8,
-        background: '#f4f7fa', border: '1px solid #dde5ee', borderRadius: 8, padding: '5px 10px',
+        background: '#F5F1EA', border: '1px solid #E8E2D8', borderRadius: 8, padding: '5px 10px',
       }}>
-        <Search size={12} color="#c0c8d2" />
-        <B w={120} h={8} />
+        <Search size={12} color="#9A8F82" />
+        <span style={{ fontSize: 11, color: '#9A8F82' }}>Search vessels, ports...</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-        <div style={{ width: 28, height: 28, background: '#f4f7fa', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Bell size={13} color="#c0c8d2" />
+        <div style={{ width: 28, height: 28, background: '#F5F1EA', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Bell size={13} color="#9A8F82" />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#e4eaf0' }} />
-          <ChevronDown size={12} color="#c0c8d2" />
+          <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#E8E2D8' }} />
+          <ChevronDown size={12} color="#9A8F82" />
         </div>
       </div>
     </div>
@@ -50,110 +60,130 @@ function TopBar() {
 }
 
 function StatCards() {
+  const stats = [
+    { label: 'Active port calls', value: '24', sub: '+3 today', accent: true },
+    { label: 'Vessels confirmed', value: '18', sub: '75% of total', accent: false },
+    { label: 'Pending approval', value: '4', sub: '↑ 2 from yesterday', accent: false },
+    { label: 'Ports this week', value: '11', sub: 'Across 8 regions', accent: false },
+  ]
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
-      {[true, false, false, false].map((accent, i) => (
+      {stats.map((s, i) => (
         <div key={i} style={{
-          background: accent ? 'linear-gradient(135deg, #3d7daf, #295c85)' : '#ffffff',
-          border: accent ? 'none' : '1px solid #e8eef4',
-          borderRadius: 12, padding: '12px 14px',
-          boxShadow: accent ? '0 4px 16px rgba(61,125,175,0.25)' : '0 1px 4px rgba(0,0,0,0.04)',
+          background: s.accent ? '#1a5e6b' : '#FAF7F2',
+          border: s.accent ? 'none' : '1px solid #E8E2D8',
+          borderRadius: 10, padding: '12px 14px',
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-            <B w={70} h={8} r={4} accent={accent} />
-            <div style={{ width: 24, height: 24, borderRadius: 6, background: accent ? 'rgba(255,255,255,0.15)' : '#f4f7fa' }} />
+          <div style={{ fontSize: 10, color: s.accent ? 'rgba(255,255,255,0.7)' : '#9A8F82', marginBottom: 6, fontWeight: 500 }}>
+            {s.label}
           </div>
-          <B w={36} h={18} r={4} accent={accent} mb={6} />
-          <B w={56} h={7} r={3} accent={accent} />
+          <div style={{ fontSize: 22, fontWeight: 700, color: s.accent ? '#ffffff' : '#1A1613', fontFamily: mono, letterSpacing: '-0.02em' }}>
+            {s.value}
+          </div>
+          <div style={{ fontSize: 10, color: s.accent ? 'rgba(255,255,255,0.5)' : '#9A8F82', marginTop: 4 }}>
+            {s.sub}
+          </div>
         </div>
       ))}
     </div>
   )
 }
 
-function TableSkeleton() {
+function PortCallTable() {
   return (
-    <div style={{ background: '#fff', border: '1px solid #e8eef4', borderRadius: 12, overflow: 'hidden', flex: 1 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid #e8eef4' }}>
-        <B w={110} h={10} r={4} />
-        <div style={{ display: 'flex', gap: 6 }}>
-          <B w={32} h={18} r={9} accent />
-          <B w={40} h={18} r={9} />
-          <B w={52} h={18} r={9} />
-        </div>
+    <div style={{ background: '#FAF7F2', border: '1px solid #E8E2D8', borderRadius: 10, overflow: 'hidden', flex: 1 }}>
+      {/* Header */}
+      <div style={{
+        display: 'grid', gridTemplateColumns: '2fr 1fr 1.2fr 0.8fr 1.2fr',
+        padding: '8px 14px', borderBottom: '1px solid #E8E2D8',
+        fontSize: 10, fontWeight: 600, color: '#9A8F82', textTransform: 'uppercase', letterSpacing: '0.05em',
+      }}>
+        <span>Vessel</span>
+        <span>Port</span>
+        <span>ETA</span>
+        <span>Pax</span>
+        <span>Status</span>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr 0.8fr 1fr', padding: '8px 16px', borderBottom: '1px solid #f0f4f8' }}>
-        {[50, 40, 36, 24, 42].map((w, i) => <B key={i} w={w} h={6} r={3} />)}
-      </div>
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} style={{
-          display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr 0.8fr 1fr',
-          padding: '9px 16px', alignItems: 'center',
-          borderBottom: i < 5 ? '1px solid #f7f9fc' : 'none',
-          background: i % 2 === 0 ? '#fff' : '#fafcff',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <div style={{ width: 22, height: 22, borderRadius: 6, background: '#e8f0f8', flexShrink: 0 }} />
-            <B w={`${60 + (i % 3) * 12}%`} h={8} r={3} />
+      {/* Rows */}
+      {vessels.map((v, i) => {
+        const s = statusConfig[v.status]
+        const isLive = v.status === 'live'
+        return (
+          <div key={i} style={{
+            display: 'grid', gridTemplateColumns: '2fr 1fr 1.2fr 0.8fr 1.2fr',
+            padding: '7px 14px', alignItems: 'center',
+            borderBottom: i < vessels.length - 1 ? '1px solid rgba(232,226,216,0.5)' : 'none',
+            background: isLive ? 'rgba(45, 125, 122, 0.04)' : i % 2 === 0 ? '#FAF7F2' : '#F5F1EA',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              {isLive && (
+                <div style={{
+                  width: 6, height: 6, borderRadius: '50%',
+                  background: 'var(--accent-bright, #3FA8A4)',
+                  animation: 'pulse-live 2s ease-in-out infinite',
+                  flexShrink: 0,
+                }} />
+              )}
+              <span style={{ fontSize: 11, fontFamily: mono, fontWeight: 500, color: '#1A1613' }}>{v.name}</span>
+            </div>
+            <span style={{ fontSize: 11, fontFamily: mono, color: '#6B6259' }}>{v.port}</span>
+            <span style={{ fontSize: 11, fontFamily: mono, color: '#6B6259' }}>{v.eta}</span>
+            <span style={{ fontSize: 11, fontFamily: mono, color: '#6B6259' }}>{v.pax}</span>
+            <span style={{
+              fontSize: 9, fontWeight: 600, fontFamily: mono,
+              color: s.color, background: s.bg,
+              padding: '2px 6px', borderRadius: 4, display: 'inline-block',
+              letterSpacing: '0.03em',
+            }}>
+              {s.label}
+            </span>
           </div>
-          <B w={`${50 + (i % 2) * 20}%`} h={8} r={3} />
-          <B w={`${45 + (i % 3) * 10}%`} h={7} r={3} />
-          <B w={28} h={8} r={3} />
-          <B w={52} h={16} r={9} />
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
 
-function ChartSkeleton() {
+function SidePanel() {
   return (
-    <div style={{ background: '#fff', border: '1px solid #e8eef4', borderRadius: 12, padding: '14px 16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14 }}>
-        <B w={100} h={10} r={4} />
-        <B w={80} h={8} r={3} />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 72 }}>
-        {[42, 67, 55, 80, 63, 91, 74].map((v, i) => (
-          <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'flex-end' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 180, flexShrink: 0 }}>
+      {/* Activity chart */}
+      <div style={{ background: '#FAF7F2', border: '1px solid #E8E2D8', borderRadius: 10, padding: 12 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: '#9A8F82', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          This week
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: 48 }}>
+          {[32, 45, 38, 62, 51, 78, 55].map((h, i) => (
+            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
               <div style={{
-                width: '100%', height: `${(v / 91) * 100}%`,
-                borderRadius: '4px 4px 2px 2px',
-                background: i === 5 ? 'rgba(61,125,175,0.25)' : '#e8f0f8',
-                animation: 'skel-shimmer 2s ease-in-out infinite',
+                width: '100%', height: `${(h / 78) * 40}px`,
+                background: i === 5 ? '#1a5e6b' : '#E8E2D8',
+                borderRadius: '3px 3px 1px 1px',
               }} />
+              <span style={{ fontSize: 8, color: '#9A8F82', fontFamily: mono }}>
+                {['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}
+              </span>
             </div>
-            <B w={16} h={6} r={2} />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  )
-}
-
-function SidePanelSkeleton() {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 200, flexShrink: 0 }}>
-      <div style={{ background: '#fff', border: '1px solid #e8eef4', borderRadius: 12, padding: 12, flex: 1 }}>
-        <B w={50} h={9} r={4} mb={12} />
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} style={{ padding: '8px 0', marginBottom: i < 2 ? 6 : 0 }}>
-            <B w="90%" h={7} r={3} mb={5} />
-            <B w="60%" h={6} r={3} />
-          </div>
-        ))}
-      </div>
-      <div style={{ background: 'linear-gradient(135deg, #0b1220, #1a2d42)', borderRadius: 12, padding: 12 }}>
-        <B w={90} h={9} r={4} mb={12} accent />
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} style={{ marginBottom: i < 2 ? 10 : 0 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
-              <div style={{ width: '55%', height: 7, borderRadius: 3, background: 'rgba(255,255,255,0.12)', animation: 'skel-shimmer 2s ease-in-out infinite' }} />
-              <div style={{ width: 18, height: 7, borderRadius: 3, background: 'rgba(255,255,255,0.15)', animation: 'skel-shimmer 2s ease-in-out infinite' }} />
+      {/* Fleet summary */}
+      <div style={{ background: '#1A1613', borderRadius: 10, padding: 12, flex: 1 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'rgba(245,241,234,0.5)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Fleet summary
+        </div>
+        {[
+          { label: 'In transit', value: '8', pct: 50 },
+          { label: 'In port', value: '4', pct: 25 },
+          { label: 'Departing', value: '4', pct: 25 },
+        ].map((r, i) => (
+          <div key={i} style={{ marginBottom: i < 2 ? 8 : 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+              <span style={{ fontSize: 10, color: 'rgba(245,241,234,0.6)' }}>{r.label}</span>
+              <span style={{ fontSize: 10, color: 'rgba(245,241,234,0.8)', fontFamily: mono, fontWeight: 600 }}>{r.value}</span>
             </div>
-            <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 9999 }}>
-              <div style={{ height: '100%', width: `${30 + i * 20}%`, background: 'rgba(91,163,204,0.3)', borderRadius: 9999 }} />
+            <div style={{ height: 3, background: 'rgba(245,241,234,0.08)', borderRadius: 9999 }}>
+              <div style={{ height: '100%', width: `${r.pct}%`, background: 'rgba(63,168,164,0.4)', borderRadius: 9999 }} />
             </div>
           </div>
         ))}
@@ -165,32 +195,17 @@ function SidePanelSkeleton() {
 export default function DashboardMockup() {
   return (
     <div style={{
-      width: '100%', height: '100%', background: '#f4f7fa',
+      width: '100%', height: '100%', background: '#F5F1EA',
       display: 'flex', flexDirection: 'column',
       fontFamily: '"Plus Jakarta Sans","Inter",-apple-system,sans-serif',
       overflow: 'hidden', fontSize: 12,
     }}>
-      <style>{shimmerKeyframes}</style>
       <TopBar />
-      <div style={{ flex: 1, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 12, overflow: 'hidden', minHeight: 0, position: 'relative' }}>
+      <div style={{ flex: 1, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10, overflow: 'hidden', minHeight: 0 }}>
         <StatCards />
-        <div style={{ display: 'flex', gap: 12, flex: 1, minHeight: 0, overflow: 'hidden' }}>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden' }}>
-            <TableSkeleton />
-            <ChartSkeleton />
-          </div>
-          <SidePanelSkeleton />
-        </div>
-        {/* Coming soon overlay */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'radial-gradient(ellipse at center, rgba(244,247,250,0.85) 0%, rgba(244,247,250,0.4) 70%, transparent 100%)',
-          pointerEvents: 'none',
-        }}>
-          <span style={{ fontSize: 32, fontWeight: 700, color: '#295c85', letterSpacing: '-0.02em' }}>
-            Coming 1st of June
-          </span>
+        <div style={{ display: 'flex', gap: 10, flex: 1, minHeight: 0, overflow: 'hidden' }}>
+          <PortCallTable />
+          <SidePanel />
         </div>
       </div>
     </div>

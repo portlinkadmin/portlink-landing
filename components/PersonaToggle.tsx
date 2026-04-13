@@ -55,10 +55,10 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
             className="persona-toggle-desktop"
             style={{
               pointerEvents: 'auto',
-              background: 'var(--ds-nav-glass)',
+              background: 'var(--nav-glass)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid var(--ds-border-2, var(--ds-border-1))',
+              border: '1px solid var(--border)',
               borderRadius: 9999,
               padding: '5px',
               display: 'flex',
@@ -88,14 +88,14 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
                     alignItems: 'center',
                     gap: 7,
                     background: 'transparent',
-                    color: isActive ? 'white' : 'var(--ds-text-3)',
+                    color: isActive ? 'white' : 'var(--text-muted)',
                     transition: 'color 0.2s',
                     zIndex: 1,
                     minHeight: 40,
                     whiteSpace: 'nowrap',
                   }}
-                  onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--ds-text-1)' }}
-                  onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--ds-text-3)' }}
+                  onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-primary)' }}
+                  onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-muted)' }}
                 >
                   {isActive && (
                     <motion.span
@@ -104,7 +104,7 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
                         position: 'absolute',
                         inset: 0,
                         borderRadius: 9999,
-                        background: 'var(--ds-primary)',
+                        background: 'var(--brand)',
                         zIndex: -1,
                       }}
                       transition={{ type: 'spring', stiffness: 380, damping: 36 }}
@@ -144,10 +144,10 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
                     bottom: 'calc(100% + 8px)',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    background: 'var(--ds-surface-1)',
+                    background: 'var(--surface)',
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid var(--ds-border-1)',
+                    border: '1px solid var(--border)',
                     borderRadius: 16,
                     padding: '6px',
                     display: 'flex',
@@ -172,8 +172,8 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
                           padding: '11px 16px',
                           borderRadius: 10,
                           border: 'none',
-                          background: isActive ? 'var(--ds-primary)' : 'transparent',
-                          color: isActive ? 'white' : 'var(--ds-text-1)',
+                          background: isActive ? 'var(--brand)' : 'transparent',
+                          color: isActive ? 'white' : 'var(--text-primary)',
                           fontFamily: 'inherit',
                           fontSize: 14,
                           fontWeight: isActive ? 600 : 400,
@@ -202,7 +202,7 @@ export default function PersonaToggle({ persona, onSelect, visible }: PersonaTog
                 padding: '10px 20px',
                 borderRadius: 9999,
                 border: 'none',
-                background: 'var(--ds-primary)',
+                background: 'var(--brand)',
                 color: 'white',
                 fontFamily: 'inherit',
                 fontSize: 13,

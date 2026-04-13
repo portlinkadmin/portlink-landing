@@ -44,7 +44,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
       ref={sectionRef}
       id="pilot"
       className="section-pad"
-      style={{ background: 'var(--ds-canvas)', padding: '120px 24px' }}
+      style={{ background: 'var(--bg)', padding: '120px 24px' }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
         <span
@@ -53,7 +53,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
             display: 'inline-block',
             background: 'rgba(31,177,199,0.12)',
             border: '1px solid rgba(31,177,199,0.35)',
-            color: 'var(--ds-primary-hover)',
+            color: 'var(--text-muted)',
             fontSize: '12px',
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
@@ -71,7 +71,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 700,
-            color: 'var(--ds-text-1)',
+            color: 'var(--text-primary)',
             marginBottom: '16px',
           }}
         >
@@ -82,7 +82,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           className="reveal"
           style={{
             fontSize: '16px',
-            color: 'var(--ds-text-2)',
+            color: 'var(--text-secondary)',
             maxWidth: '600px',
             margin: '0 auto 48px',
             lineHeight: 1.6,
@@ -107,27 +107,25 @@ export default function PilotSection({ persona }: { persona: Persona }) {
                 key={card.title}
                 className="reveal"
                 style={{
-                  background: 'var(--ds-surface-2)',
-                  border: '1px solid var(--ds-border-1)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                   borderRadius: '16px',
                   padding: '36px 28px',
                   textAlign: 'left',
-                  transition: 'border-color 0.3s, box-shadow 0.3s',
+                  transition: 'border-color 0.3s',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--ds-primary)'
-                  e.currentTarget.style.boxShadow = '0 0 20px var(--ds-focus-ring, rgba(61,125,175,0.15))'
+                  e.currentTarget.style.borderColor = 'var(--text-muted)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--ds-border-1)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.borderColor = 'var(--border)'
                 }}
               >
-                <Icon size={32} color="var(--ds-accent)" style={{ marginBottom: '16px' }} />
-                <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: '8px' }}>
+                <Icon size={32} color="var(--text-muted)" style={{ marginBottom: '16px' }} />
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   {card.title}
                 </h3>
-                <p style={{ fontSize: '14px', color: 'var(--ds-text-2)', lineHeight: 1.6, margin: 0 }}>{card.body}</p>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{card.body}</p>
               </div>
             )
           })}
@@ -142,8 +140,8 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           className="reveal"
           style={{
             display: 'inline-block',
-            background: 'var(--ds-primary)',
-            color: 'var(--ds-primary-ink)',
+            background: 'var(--brand)',
+            color: 'var(--bg)',
             padding: '16px 40px',
             borderRadius: '9999px',
             fontWeight: 600,
@@ -151,8 +149,8 @@ export default function PilotSection({ persona }: { persona: Persona }) {
             textDecoration: 'none',
             transition: 'background 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ds-primary-hover)')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ds-primary)')}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
         >
           Request Pilot Access
         </a>

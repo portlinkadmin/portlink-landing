@@ -174,19 +174,7 @@ export const ContainerScroll = ({
               }}
             />
           </div>
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: Math.max(6, sz.tBorder * 2),
-              fontSize: Math.max(9, Math.round(sz.tBorder * 4)),
-              color: "var(--ds-text-3)",
-              fontWeight: 500,
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-            }}
-          >
-            Coming in June
-          </p>
+{/* "Coming in June" removed — showing realistic dashboard */}
         </motion.div>
       </div>
     </div>

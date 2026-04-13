@@ -88,7 +88,7 @@ export default function EcosystemSection({ persona }: { persona: Persona }) {
       initial="hidden"
       animate="show"
       variants={container}
-      style={{ background: 'var(--ds-surface-2)', padding: '120px 24px' }}
+      style={{ background: 'var(--surface)', padding: '120px 24px' }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div variants={item} style={{ textAlign: 'center', marginBottom: '64px' }}>
@@ -98,7 +98,7 @@ export default function EcosystemSection({ persona }: { persona: Persona }) {
               fontSize: '12px',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
-              color: 'var(--ds-primary-hover)',
+              color: 'var(--text-muted)',
               fontWeight: 500,
             }}
           >
@@ -108,14 +108,14 @@ export default function EcosystemSection({ persona }: { persona: Persona }) {
             style={{
               fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 700,
-              color: 'var(--ds-text-1)',
+              color: 'var(--text-primary)',
               margin: '12px 0 16px',
             }}
           >
             {data.headline}
           </h2>
           <p
-            style={{ fontSize: '16px', color: 'var(--ds-text-2)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}
+            style={{ fontSize: '16px', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}
           >
             {data.desc}
           </p>
@@ -135,26 +135,24 @@ export default function EcosystemSection({ persona }: { persona: Persona }) {
                 key={partner.title}
                 variants={item}
                 style={{
-                  background: 'var(--ds-surface-1)',
-                  border: '1px solid var(--ds-border-1)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                   borderRadius: '16px',
                   padding: '28px 24px',
-                  transition: 'border-color 0.3s, box-shadow 0.3s',
+                  transition: 'border-color 0.3s',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--ds-primary)'
-                  e.currentTarget.style.boxShadow = '0 0 20px var(--ds-focus-ring, rgba(61,125,175,0.15))'
+                  e.currentTarget.style.borderColor = 'var(--text-muted)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--ds-border-1)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.borderColor = 'var(--border)'
                 }}
               >
-                <Icon size={24} color="var(--ds-accent)" style={{ marginBottom: '16px' }} />
-                <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: '8px' }}>
+                <Icon size={24} color="var(--text-muted)" style={{ marginBottom: '16px' }} />
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   {partner.title}
                 </h3>
-                <p style={{ fontSize: '14px', color: 'var(--ds-text-2)', lineHeight: 1.6, margin: 0 }}>{partner.body}</p>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{partner.body}</p>
               </motion.div>
             )
           })}

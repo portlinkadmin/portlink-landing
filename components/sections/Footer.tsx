@@ -19,8 +19,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: 'var(--ds-canvas)',
-        borderTop: '1px solid var(--ds-border-1)',
+        background: 'var(--bg)',
+        borderTop: '1px solid var(--border)',
         padding: '64px 24px 32px',
       }}
     >
@@ -44,7 +44,7 @@ export default function Footer() {
               style={{ height: '28px' }}
             />
           </div>
-          <p style={{ fontSize: '14px', color: 'var(--ds-text-3)', lineHeight: 1.6, maxWidth: '300px' }}>
+          <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '300px' }}>
             The port call platform. Connecting cruise lines, port agents, and tour operators in one shared workspace.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function Footer() {
               style={{
                 fontSize: '13px',
                 fontWeight: 600,
-                color: 'var(--ds-text-2)',
+                color: 'var(--text-secondary)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 marginBottom: '16px',
@@ -70,13 +70,13 @@ export default function Footer() {
                   <a
                     href={link.href}
                     style={{
-                      color: 'var(--ds-text-3)',
+                      color: 'var(--text-muted)',
                       textDecoration: 'none',
                       fontSize: '14px',
                       transition: 'color 0.2s',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ds-text-1)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-text-3)')}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                   >
                     {link.label}
                   </a>
@@ -92,7 +92,7 @@ export default function Footer() {
         style={{
           maxWidth: '1100px',
           margin: '48px auto 0',
-          borderTop: '1px solid var(--ds-border-1)',
+          borderTop: '1px solid var(--border)',
           paddingTop: '24px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -101,10 +101,10 @@ export default function Footer() {
           gap: '12px',
         }}
       >
-        <p style={{ fontSize: '13px', color: 'var(--ds-text-3)' }}>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
           © {new Date().getFullYear()} PortLink AS. All rights reserved.
         </p>
-        <p style={{ fontSize: '13px', color: 'var(--ds-text-3)' }}>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
           Made in Oslo, Norway
         </p>
       </div>

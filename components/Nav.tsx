@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 
 const links = [
@@ -36,8 +36,8 @@ export default function Nav({ theme, setTheme }: NavProps) {
         zIndex: 50,
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        background: 'var(--ds-nav-glass)',
-        borderBottom: '1px solid var(--ds-border-1)',
+        background: 'var(--nav-glass)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       <div
@@ -71,14 +71,14 @@ export default function Nav({ theme, setTheme }: NavProps) {
               href={link.href}
               onClick={(e) => { e.preventDefault(); smoothScrollTo(link.href) }}
               style={{
-                color: 'var(--ds-text-2)',
+                color: 'var(--text-secondary)',
                 textDecoration: 'none',
                 fontSize: '14px',
                 fontWeight: 500,
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ds-text-1)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-text-2)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
             >
               {link.label}
             </a>
@@ -97,9 +97,9 @@ export default function Nav({ theme, setTheme }: NavProps) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '9999px',
-              border: '1px solid var(--ds-border-1)',
+              border: '1px solid var(--border)',
               background: 'transparent',
-              color: 'var(--ds-text-2)',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               transition: 'border-color 0.2s, color 0.2s',
             }}
@@ -112,8 +112,8 @@ export default function Nav({ theme, setTheme }: NavProps) {
             onClick={(e) => { e.preventDefault(); smoothScrollTo('#access') }}
             className="nav-cta-desktop"
             style={{
-              background: 'var(--ds-primary)',
-              color: 'var(--ds-primary-ink)',
+              background: 'var(--brand)',
+              color: '#ffffff',
               padding: '8px 20px',
               borderRadius: '9999px',
               fontSize: '14px',
@@ -121,8 +121,8 @@ export default function Nav({ theme, setTheme }: NavProps) {
               textDecoration: 'none',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ds-primary-hover)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ds-primary)')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
           >
             Request Access
           </a>
@@ -136,7 +136,7 @@ export default function Nav({ theme, setTheme }: NavProps) {
               display: 'none',
               background: 'none',
               border: 'none',
-              color: 'var(--ds-text-1)',
+              color: 'var(--text-primary)',
               cursor: 'pointer',
               padding: '4px',
             }}
@@ -151,8 +151,8 @@ export default function Nav({ theme, setTheme }: NavProps) {
         <div
           className="nav-mobile-menu"
           style={{
-            background: 'var(--ds-nav-glass)',
-            borderTop: '1px solid var(--ds-border-1)',
+            background: 'var(--nav-glass)',
+            borderTop: '1px solid var(--border)',
             padding: '16px 24px',
           }}
         >
@@ -164,10 +164,10 @@ export default function Nav({ theme, setTheme }: NavProps) {
               style={{
                 display: 'block',
                 padding: '12px 0',
-                color: 'var(--ds-text-2)',
+                color: 'var(--text-secondary)',
                 textDecoration: 'none',
                 fontSize: '16px',
-                borderBottom: '1px solid var(--ds-border-1)',
+                borderBottom: '1px solid var(--border)',
               }}
             >
               {link.label}
@@ -179,8 +179,8 @@ export default function Nav({ theme, setTheme }: NavProps) {
             style={{
               display: 'inline-block',
               marginTop: '16px',
-              background: 'var(--ds-primary)',
-              color: 'var(--ds-primary-ink)',
+              background: 'var(--brand)',
+              color: '#ffffff',
               padding: '10px 24px',
               borderRadius: '9999px',
               fontSize: '14px',

@@ -78,7 +78,8 @@ function RoleContent({ role }: { role: RoleKey }) {
                 fontSize: '12px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-                color: 'var(--ds-primary-hover)',
+                color: 'var(--inverted-text)',
+                opacity: 0.5,
                 fontWeight: 500,
                 marginBottom: '12px',
               }}
@@ -89,7 +90,7 @@ function RoleContent({ role }: { role: RoleKey }) {
               style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
                 fontWeight: 700,
-                color: 'var(--ds-text-1)',
+                color: 'var(--inverted-text)',
                 margin: '0 0 16px',
                 lineHeight: 1.2,
               }}
@@ -99,7 +100,8 @@ function RoleContent({ role }: { role: RoleKey }) {
             <p
               style={{
                 fontSize: '16px',
-                color: 'var(--ds-text-2)',
+                color: 'var(--inverted-text)',
+                opacity: 0.7,
                 lineHeight: 1.6,
                 maxWidth: '600px',
                 margin: '0 auto',
@@ -126,8 +128,8 @@ function RoleContent({ role }: { role: RoleKey }) {
       >
         {data.features.map((f) => (
           <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <CheckCircle size={18} color="var(--ds-primary)" style={{ flexShrink: 0 }} />
-            <span style={{ fontSize: '15px', color: 'var(--ds-text-1)' }}>{f}</span>
+            <CheckCircle size={18} color="var(--brand-bright)" style={{ flexShrink: 0 }} />
+            <span style={{ fontSize: '15px', color: 'var(--inverted-text)' }}>{f}</span>
           </li>
         ))}
       </ul>
@@ -146,7 +148,7 @@ export default function RoleSection({ persona }: { persona: Persona }) {
     <section
       ref={sectionRef}
       id="roles"
-      style={{ background: 'var(--ds-canvas)', paddingTop: '48px', paddingBottom: '24px' }}
+      style={{ background: 'var(--inverted-bg)', paddingTop: '48px', paddingBottom: '24px', color: 'var(--inverted-text)' }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
         {/* Section header — only shown in "all" mode. Single persona gets title from ContainerScroll */}
@@ -159,7 +161,8 @@ export default function RoleSection({ persona }: { persona: Persona }) {
                 fontSize: '12px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-                color: 'var(--ds-primary-hover)',
+                color: 'var(--inverted-text)',
+                opacity: 0.5,
                 fontWeight: 500,
               }}
             >
@@ -170,7 +173,7 @@ export default function RoleSection({ persona }: { persona: Persona }) {
               style={{
                 fontSize: 'clamp(2rem, 4vw, 3rem)',
                 fontWeight: 700,
-                color: 'var(--ds-text-1)',
+                color: 'var(--inverted-text)',
                 margin: '12px 0',
               }}
             >
@@ -187,7 +190,7 @@ export default function RoleSection({ persona }: { persona: Persona }) {
               justifyContent: 'center',
               gap: '32px',
               marginBottom: '48px',
-              borderBottom: '1px solid var(--ds-border-1)',
+              borderBottom: '1px solid var(--dark-border)',
             }}
           >
             {tabs.map((tab) => (
@@ -198,12 +201,12 @@ export default function RoleSection({ persona }: { persona: Persona }) {
                   background: 'none',
                   border: 'none',
                   fontFamily: 'inherit',
-                  color: activeTab === tab ? 'var(--ds-accent)' : 'var(--ds-text-2)',
+                  color: activeTab === tab ? 'var(--brand-bright)' : 'var(--inverted-text)',
                   fontSize: '15px',
                   fontWeight: 600,
                   cursor: 'pointer',
                   paddingBottom: '12px',
-                  borderBottom: activeTab === tab ? '2px solid var(--ds-accent)' : '2px solid transparent',
+                  borderBottom: activeTab === tab ? '2px solid var(--brand-bright)' : '2px solid transparent',
                   transition: 'all 0.2s',
                 }}
               >

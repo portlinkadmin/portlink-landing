@@ -57,9 +57,9 @@ const stepTransition = { duration: 0.32 }
 
 const inputBase: React.CSSProperties = {
   width: '100%',
-  background: 'var(--ds-surface-2)',
-  border: '1px solid var(--ds-border-1)',
-  color: 'var(--ds-text-1)',
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  color: 'var(--text-primary)',
   borderRadius: '10px',
   padding: '13px 16px',
   fontSize: '15px',
@@ -123,11 +123,11 @@ export default function AccessSection() {
   }
 
   const focusStyle = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = 'var(--ds-primary)'
-    e.currentTarget.style.boxShadow = '0 0 0 3px var(--ds-focus-ring, rgba(61,125,175,0.18))'
+    e.currentTarget.style.borderColor = 'var(--brand)'
+    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(26, 94, 107, 0.12)'
   }
   const blurStyle = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = 'var(--ds-border-1)'
+    e.currentTarget.style.borderColor = 'var(--border)'
     e.currentTarget.style.boxShadow = 'none'
   }
 
@@ -135,14 +135,14 @@ export default function AccessSection() {
     <section
       ref={sectionRef}
       id="access"
-      style={{ background: 'var(--ds-canvas)', padding: '0 0 80px' }}
+      style={{ background: 'var(--bg)', padding: '0 0 80px' }}
     >
       {/* ── Pilot CTA block (above form) ── */}
       <div
         className="reveal"
         style={{
-          background: 'var(--ds-surface-1)',
-          borderBottom: '1px solid var(--ds-border-1)',
+          background: 'var(--surface)',
+          borderBottom: '1px solid var(--border)',
           padding: '80px 24px',
           textAlign: 'center',
         }}
@@ -150,17 +150,17 @@ export default function AccessSection() {
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <span style={{
             fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.12em',
-            color: 'var(--ds-primary-hover)', fontWeight: 600,
+            color: 'var(--text-muted)', fontWeight: 600,
           }}>
             Request access
           </span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700,
-            color: 'var(--ds-text-1)', margin: '14px 0 16px',
+            color: 'var(--text-primary)', margin: '14px 0 16px',
           }}>
             We are selective about our first cohort.
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--ds-text-2)', lineHeight: 1.65, marginBottom: '48px', maxWidth: '560px', margin: '0 auto 48px' }}>
+          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '48px', maxWidth: '560px', margin: '0 auto 48px' }}>
             We are not taking everyone. The first group will shape what Portlink becomes, so we are looking for teams with complex operations, a low tolerance for manual work, and opinions about what is broken.
           </p>
           <div style={{
@@ -173,24 +173,24 @@ export default function AccessSection() {
               const PerkIcon = perk.icon
               return (
                 <div key={perk.title} style={{
-                  background: 'var(--ds-surface-2)',
-                  border: '1px solid var(--ds-border-1)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                   borderRadius: '14px',
                   padding: '24px 20px',
                 }}>
                   <div style={{
                     width: 40, height: 40, borderRadius: 10,
-                    background: 'var(--ds-surface-1)',
-                    border: '1px solid var(--ds-border-1)',
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     marginBottom: 14,
                   }}>
-                    <PerkIcon size={18} color="var(--ds-primary)" />
+                    <PerkIcon size={18} color="var(--brand)" />
                   </div>
-                  <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: 6 }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 6 }}>
                     {perk.title}
                   </h3>
-                  <p style={{ fontSize: '13px', color: 'var(--ds-text-2)', lineHeight: 1.6, margin: 0 }}>
+                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
                     {perk.body}
                   </p>
                 </div>
@@ -217,14 +217,14 @@ export default function AccessSection() {
               transition={stepTransition}
               style={{ textAlign: 'center', padding: '48px 24px' }}
             >
-              <CheckCircle size={52} color="var(--ds-primary)" style={{ display: 'block', margin: '0 auto 20px' }} />
-              <h3 style={{ fontSize: '26px', fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 12 }}>
+              <CheckCircle size={52} color="var(--brand)" style={{ display: 'block', margin: '0 auto 20px' }} />
+              <h3 style={{ fontSize: '26px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
                 We got your request.
               </h3>
-              <p style={{ fontSize: '16px', color: 'var(--ds-text-2)', lineHeight: 1.65, marginBottom: 8 }}>
-                We have sent a confirmation to <strong style={{ color: 'var(--ds-text-1)' }}>{data.email}</strong>. Our team will review your application and get back to you within 48 hours.
+              <p style={{ fontSize: '16px', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: 8 }}>
+                We have sent a confirmation to <strong style={{ color: 'var(--text-primary)' }}>{data.email}</strong>. Our team will review your application and get back to you within 48 hours.
               </p>
-              <p style={{ fontSize: '14px', color: 'var(--ds-text-3)', lineHeight: 1.55 }}>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.55 }}>
                 Check your spam folder if you do not see it.
               </p>
             </motion.div>
@@ -234,21 +234,21 @@ export default function AccessSection() {
               {stepIndex >= 0 && (
                 <div style={{ marginBottom: 32 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <span style={{ fontSize: 13, color: 'var(--ds-text-3)', fontWeight: 500 }}>
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 500 }}>
                       Step {stepIndex + 1} of {totalSteps}
                     </span>
-                    <span style={{ fontSize: 13, color: 'var(--ds-text-3)' }}>
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                       {step === 'role' ? 'Your role' : step === 'identity' ? 'About you' : 'Your operation'}
                     </span>
                   </div>
                   <div style={{
-                    height: 3, background: 'var(--ds-border-1)',
+                    height: 3, background: 'var(--border)',
                     borderRadius: 9999, overflow: 'hidden',
                   }}>
                     <motion.div
                       animate={{ width: `${((stepIndex + 1) / totalSteps) * 100}%` }}
                       transition={{ duration: 0.4, ease: 'easeOut' }}
-                      style={{ height: '100%', background: 'var(--ds-primary)', borderRadius: 9999 }}
+                      style={{ height: '100%', background: 'var(--brand)', borderRadius: 9999 }}
                     />
                   </div>
                 </div>
@@ -266,10 +266,10 @@ export default function AccessSection() {
                     exit="exit"
                     transition={stepTransition}
                   >
-                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 8 }}>
+                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
                       What is your role?
                     </h3>
-                    <p style={{ fontSize: 15, color: 'var(--ds-text-2)', marginBottom: 28, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 15, color: 'var(--text-secondary)', marginBottom: 28, lineHeight: 1.5 }}>
                       We tailor the pilot to your operation.
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -290,33 +290,33 @@ export default function AccessSection() {
                               gap: 16,
                               padding: '18px 20px',
                               borderRadius: 14,
-                              border: `1.5px solid ${isSelected ? 'var(--ds-primary)' : 'var(--ds-border-1)'}`,
-                              background: isSelected ? 'rgba(61,125,175,0.08)' : 'var(--ds-surface-1)',
+                              border: `1.5px solid ${isSelected ? 'var(--brand)' : 'var(--border)'}`,
+                              background: isSelected ? 'var(--brand-faint)' : 'var(--surface)',
                               cursor: 'pointer',
                               textAlign: 'left',
                               fontFamily: 'inherit',
                               transition: 'border-color 0.18s, background 0.18s',
                               width: '100%',
                             }}
-                            onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.borderColor = 'var(--ds-primary)' }}
-                            onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.borderColor = 'var(--ds-border-1)' }}
+                            onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.borderColor = 'var(--brand)' }}
+                            onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.borderColor = 'var(--border)' }}
                           >
                             <span style={{
                               width: 42, height: 42, borderRadius: 10,
-                              background: 'var(--ds-surface-2)',
-                              border: '1px solid var(--ds-border-1)',
+                              background: 'var(--surface)',
+                              border: '1px solid var(--border)',
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
                               flexShrink: 0,
                             }}>
-                              <Icon size={18} color="var(--ds-primary)" />
+                              <Icon size={18} color="var(--brand)" />
                             </span>
                             <span>
-                              <span style={{ display: 'block', fontSize: 15, fontWeight: 600, color: 'var(--ds-text-1)', marginBottom: 2 }}>
+                              <span style={{ display: 'block', fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
                                 {opt.value}
                               </span>
-                              <span style={{ fontSize: 13, color: 'var(--ds-text-3)' }}>{opt.desc}</span>
+                              <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{opt.desc}</span>
                             </span>
-                            <ChevronRight size={16} color="var(--ds-text-3)" style={{ marginLeft: 'auto', flexShrink: 0 }} />
+                            <ChevronRight size={16} color="var(--text-muted)" style={{ marginLeft: 'auto', flexShrink: 0 }} />
                           </button>
                         )
                       })}
@@ -335,10 +335,10 @@ export default function AccessSection() {
                     transition={stepTransition}
                     onSubmit={(e) => { e.preventDefault(); go('operation', 1) }}
                   >
-                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 8 }}>
+                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
                       About you
                     </h3>
-                    <p style={{ fontSize: 15, color: 'var(--ds-text-2)', marginBottom: 28, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 15, color: 'var(--text-secondary)', marginBottom: 28, lineHeight: 1.5 }}>
                       How should we reach you?
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -348,7 +348,7 @@ export default function AccessSection() {
                         { name: 'company' as const, label: 'Company', type: 'text', placeholder: 'Your company name', auto: 'organization' },
                       ].map((f) => (
                         <div key={f.name}>
-                          <label htmlFor={f.name} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--ds-text-2)', marginBottom: 6 }}>
+                          <label htmlFor={f.name} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 6 }}>
                             {f.label}
                           </label>
                           <input
@@ -369,8 +369,8 @@ export default function AccessSection() {
                     <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
                       <button type="button" onClick={() => go('role', -1)} style={{
                         display: 'flex', alignItems: 'center', gap: 6,
-                        background: 'transparent', border: '1px solid var(--ds-border-1)',
-                        color: 'var(--ds-text-2)', borderRadius: 9999,
+                        background: 'transparent', border: '1px solid var(--border)',
+                        color: 'var(--text-secondary)', borderRadius: 9999,
                         padding: '12px 20px', cursor: 'pointer', fontFamily: 'inherit',
                         fontSize: 14, fontWeight: 500, transition: 'border-color 0.2s',
                       }}>
@@ -378,13 +378,13 @@ export default function AccessSection() {
                       </button>
                       <button type="submit" style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        background: 'var(--ds-primary)', color: 'var(--ds-primary-ink)',
+                        background: 'var(--brand)', color: 'var(--bg)',
                         borderRadius: 9999, padding: '12px 24px',
                         fontWeight: 600, fontSize: 15, border: 'none',
                         cursor: 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
                       }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ds-primary-hover)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ds-primary)')}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
                       >
                         Continue <ChevronRight size={15} />
                       </button>
@@ -403,10 +403,10 @@ export default function AccessSection() {
                     transition={stepTransition}
                     onSubmit={handleSubmit}
                   >
-                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--ds-text-1)', marginBottom: 8 }}>
+                    <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
                       Your operation
                     </h3>
-                    <p style={{ fontSize: 15, color: 'var(--ds-text-2)', marginBottom: 28, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 15, color: 'var(--text-secondary)', marginBottom: 28, lineHeight: 1.5 }}>
                       Help us understand your setup so we can tailor the pilot.
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -474,8 +474,8 @@ export default function AccessSection() {
 
                       {/* Shared message */}
                       <div>
-                        <label htmlFor="message" style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--ds-text-2)', marginBottom: 6 }}>
-                          Anything else? <span style={{ color: 'var(--ds-text-3)', fontWeight: 400 }}>(optional)</span>
+                        <label htmlFor="message" style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 6 }}>
+                          Anything else? <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>(optional)</span>
                         </label>
                         <textarea
                           id="message"
@@ -491,7 +491,7 @@ export default function AccessSection() {
                     </div>
 
                     {submitError && (
-                      <p style={{ color: '#e53e3e', fontSize: 14, marginTop: 16, marginBottom: 0 }}>
+                      <p style={{ color: 'var(--alert)', fontSize: 14, marginTop: 16, marginBottom: 0 }}>
                         {submitError}
                       </p>
                     )}
@@ -499,8 +499,8 @@ export default function AccessSection() {
                     <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
                       <button type="button" onClick={() => go('identity', -1)} disabled={submitting} style={{
                         display: 'flex', alignItems: 'center', gap: 6,
-                        background: 'transparent', border: '1px solid var(--ds-border-1)',
-                        color: 'var(--ds-text-2)', borderRadius: 9999,
+                        background: 'transparent', border: '1px solid var(--border)',
+                        color: 'var(--text-secondary)', borderRadius: 9999,
                         padding: '12px 20px', cursor: 'pointer', fontFamily: 'inherit',
                         fontSize: 14, fontWeight: 500, transition: 'border-color 0.2s',
                         opacity: submitting ? 0.5 : 1,
@@ -509,14 +509,14 @@ export default function AccessSection() {
                       </button>
                       <button type="submit" disabled={submitting} style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        background: 'var(--ds-primary)', color: 'var(--ds-primary-ink)',
+                        background: 'var(--brand)', color: 'var(--bg)',
                         borderRadius: 9999, padding: '12px 24px',
                         fontWeight: 600, fontSize: 15, border: 'none',
                         cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
                         opacity: submitting ? 0.7 : 1,
                       }}
-                        onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--ds-primary-hover)' }}
-                        onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--ds-primary)' }}
+                        onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--brand-bright)' }}
+                        onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--brand)' }}
                       >
                         {submitting ? 'Sending...' : 'Request access'} {!submitting && <ChevronRight size={15} />}
                       </button>
@@ -551,8 +551,8 @@ interface FieldProps {
 function Field({ id, label, placeholder, type = 'text', required, optional, value, onChange, onFocus, onBlur, inputBase }: FieldProps) {
   return (
     <div>
-      <label htmlFor={id} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--ds-text-2)', marginBottom: 6 }}>
-        {label}{optional && <span style={{ color: 'var(--ds-text-3)', fontWeight: 400 }}> (optional)</span>}
+      <label htmlFor={id} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 6 }}>
+        {label}{optional && <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}> (optional)</span>}
       </label>
       <input
         id={id} type={type} placeholder={placeholder}
@@ -578,7 +578,7 @@ interface SelectFieldProps {
 function SelectField({ id, label, required, value, onChange, options, inputBase }: SelectFieldProps) {
   return (
     <div>
-      <label htmlFor={id} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--ds-text-2)', marginBottom: 6 }}>
+      <label htmlFor={id} style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 6 }}>
         {label}
       </label>
       <select

@@ -38,8 +38,8 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
       transition={{ duration: 0.5, delay: isMobile ? 0 : delay, ease: [0.22, 1, 0.36, 1] }}
       style={{
         gridColumn: colSpan,
-        background: accent ? 'var(--ds-primary)' : 'var(--ds-surface-1)',
-        border: `1px solid ${accent ? 'transparent' : 'var(--ds-border-1)'}`,
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
         borderRadius: '20px',
         padding: '28px 24px',
         display: 'flex',
@@ -50,23 +50,7 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
         transition: 'border-color 0.25s, box-shadow 0.25s',
         cursor: 'default',
       }}
-      whileHover={{
-        boxShadow: accent
-          ? '0 8px 32px rgba(61,125,175,0.35)'
-          : '0 4px 24px rgba(0,0,0,0.12)',
-      }}
     >
-      {/* Subtle corner glow */}
-      {!accent && (
-        <div style={{
-          position: 'absolute',
-          top: 0, right: 0,
-          width: 120, height: 120,
-          background: 'radial-gradient(circle at top right, var(--ds-focus-ring, rgba(61,125,175,0.06)), transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-      )}
-
       {/* Visual area */}
       {visual && (
         <div style={{
@@ -85,7 +69,7 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
         <h3 style={{
           fontSize: '16px',
           fontWeight: 700,
-          color: accent ? 'white' : 'var(--ds-text-1)',
+          color: 'var(--text-primary)',
           margin: '0 0 8px',
           lineHeight: 1.3,
         }}>
@@ -93,7 +77,7 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
         </h3>
         <p style={{
           fontSize: '14px',
-          color: accent ? 'rgba(255,255,255,0.8)' : 'var(--ds-text-2)',
+          color: 'var(--text-secondary)',
           lineHeight: 1.65,
           margin: 0,
         }}>

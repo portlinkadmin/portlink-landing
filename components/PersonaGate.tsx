@@ -24,7 +24,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 100,
-        background: 'var(--ds-canvas)',
+        background: 'var(--bg)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -53,7 +53,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
         />
         <p style={{
           fontSize: '11px',
-          color: 'var(--ds-text-3)',
+          color: 'var(--text-muted)',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           margin: 0,
@@ -70,7 +70,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
         style={{
           fontSize: 'clamp(1.15rem, 2.8vw, 1.6rem)',
           fontWeight: 600,
-          color: 'var(--ds-text-1)',
+          color: 'var(--text-primary)',
           marginBottom: 'clamp(16px, 3vh, 28px)',
           textAlign: 'center',
           margin: '0 0 clamp(16px, 3vh, 28px)',
@@ -99,8 +99,8 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
               transition={{ duration: 0.45, delay: 0.25 + i * 0.08 }}
               onClick={() => onSelect(role.id)}
               style={{
-                background: 'var(--ds-surface-1)',
-                border: '1px solid var(--ds-border-1)',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
                 borderRadius: '14px',
                 // Compact padding that scales with viewport height
                 padding: 'clamp(20px, 3vh, 32px) clamp(16px, 2vw, 28px)',
@@ -117,24 +117,24 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-3px)'
-                e.currentTarget.style.borderColor = 'var(--ds-primary)'
-                e.currentTarget.style.boxShadow = '0 0 24px rgba(61,125,175,0.2)'
+                e.currentTarget.style.borderColor = 'var(--brand)'
+                e.currentTarget.style.boxShadow = '0 0 24px rgba(26, 94, 107, 0.12)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'none'
-                e.currentTarget.style.borderColor = 'var(--ds-border-1)'
+                e.currentTarget.style.borderColor = 'var(--border)'
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
               <Icon
                 size={28}
-                color="var(--ds-primary)"
+                color="var(--brand)"
                 style={{ marginBottom: 'clamp(10px, 1.5vh, 16px)', flexShrink: 0 }}
               />
               <span style={{
                 fontSize: 'clamp(14px, 1.8vw, 17px)',
                 fontWeight: 600,
-                color: 'var(--ds-text-1)',
+                color: 'var(--text-primary)',
                 display: 'block',
                 marginBottom: 4,
                 whiteSpace: 'nowrap',
@@ -143,7 +143,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
               </span>
               <span style={{
                 fontSize: 'clamp(12px, 1.4vw, 13px)',
-                color: 'var(--ds-text-2)',
+                color: 'var(--text-secondary)',
                 lineHeight: 1.4,
               }}>
                 {role.desc}
@@ -163,15 +163,15 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
           marginTop: 'clamp(16px, 2.5vh, 28px)',
           background: 'none',
           border: 'none',
-          color: 'var(--ds-text-3)',
+          color: 'var(--text-muted)',
           fontSize: '13px',
           cursor: 'pointer',
           padding: '8px 16px',
           fontFamily: 'inherit',
           transition: 'color 0.2s',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ds-primary)')}
-        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-text-3)')}
+        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--brand)')}
+        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
       >
         View full overview →
       </motion.button>
