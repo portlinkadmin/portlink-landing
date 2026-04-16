@@ -231,9 +231,9 @@ export default function WavesHero() {
       const midY = pointsBuffer[midIdx * 2 + 1]
 
       const edgeGrad = ctx.createLinearGradient(0, midY - 8, 0, midY + 36)
-      edgeGrad.addColorStop(0,    `rgba(255,255,255,${topAlpha.toFixed(3)})`)
-      edgeGrad.addColorStop(0.35, `rgba(255,255,255,${midAlpha.toFixed(3)})`)
-      edgeGrad.addColorStop(1,    'rgba(255,255,255,0)')
+      edgeGrad.addColorStop(0,    `rgba(255, 255, 255, ${topAlpha.toFixed(3)})`)
+      edgeGrad.addColorStop(0.35, `rgba(255, 255, 255, ${midAlpha.toFixed(3)})`)
+      edgeGrad.addColorStop(1,    'rgba(255, 255, 255, 0)')
 
       ctx.save()
       ctx.beginPath()

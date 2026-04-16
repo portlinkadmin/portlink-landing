@@ -5,9 +5,9 @@ import { useScroll, useTransform, motion } from "framer-motion";
 const TABLET_LOGICAL_W = 1200;
 const TABLET_LOGICAL_H = 900;
 
-const BEZEL_COLOR = "#5a5a5a";
-const BEZEL_BG = "#1a1a1a";
-const SHADOW = "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a";
+const BEZEL_COLOR = "var(--ds-text-2)";
+const BEZEL_BG = "var(--ds-text-1)";
+const SHADOW = "0 0 rgba(0, 0, 0, 0.30), 0 9px 20px rgba(0, 0, 0, 0.29), 0 37px 37px rgba(0, 0, 0, 0.26), 0 84px 50px rgba(0, 0, 0, 0.15), 0 149px 60px rgba(0, 0, 0, 0.04)";
 
 function useDeviceSize() {
   const [vw, setVw] = React.useState(1280);
@@ -157,7 +157,7 @@ export const ContainerScroll = ({
                 width: sz.tDotSize,
                 height: sz.tDotSize,
                 borderRadius: "50%",
-                background: "#3a3a3a",
+                background: "var(--ds-text-2)",
                 margin: `0 auto ${sz.tPad - 2}px`,
               }}
             />
@@ -169,24 +169,11 @@ export const ContainerScroll = ({
                 width: sz.tHomeW,
                 height: sz.tHomeH,
                 borderRadius: 9999,
-                background: "#3a3a3a",
+                background: "var(--ds-text-2)",
                 margin: `${sz.tPad - 2}px auto 0`,
               }}
             />
           </div>
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: Math.max(6, sz.tBorder * 2),
-              fontSize: Math.max(9, Math.round(sz.tBorder * 4)),
-              color: "var(--text-muted)",
-              fontWeight: 500,
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-            }}
-          >
-            Coming in June
-          </p>
         </motion.div>
       </div>
     </div>

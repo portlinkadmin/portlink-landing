@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-ds-version.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "ds:check": "node scripts/check-ds-version.mjs --strict"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

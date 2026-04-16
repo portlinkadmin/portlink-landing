@@ -73,7 +73,7 @@ export default function Footer() {
                       color: 'var(--text-muted)',
                       textDecoration: 'none',
                       fontSize: '14px',
-                      transition: 'color 0.2s',
+                      transition: 'color var(--ds-dur-2) var(--ds-ease-standard)',
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}

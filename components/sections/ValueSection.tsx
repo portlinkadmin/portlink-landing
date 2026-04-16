@@ -83,7 +83,7 @@ export default function ValueSection() {
                 border: '1px solid var(--border)',
                 borderRadius: '12px',
                 padding: '28px 24px',
-                transition: 'border-color 0.3s',
+                transition: 'border-color var(--ds-dur-3) var(--ds-ease-standard)',
                 cursor: 'default',
               }}
               onMouseEnter={(e) => {

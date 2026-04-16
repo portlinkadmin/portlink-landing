@@ -6,8 +6,6 @@ import { CheckCircle } from 'lucide-react'
 import { useReveal } from '@/hooks/useReveal'
 import { ContainerScroll } from '@/components/ContainerScroll'
 import DashboardMockup from '@/components/DashboardMockup'
-import DashboardAgent from '@/components/DashboardAgent'
-import DashboardTour from '@/components/DashboardTour'
 import type { Persona } from '@/app/page'
 
 type RoleKey = 'cruise' | 'agent' | 'tour'
@@ -66,7 +64,6 @@ const tabs: RoleKey[] = ['cruise', 'agent', 'tour']
 
 function RoleContent({ role }: { role: RoleKey }) {
   const data = roleData[role]
-  const TabletDashboard = role === 'agent' ? DashboardAgent : role === 'tour' ? DashboardTour : DashboardMockup
   return (
     <div>
       <ContainerScroll
@@ -112,7 +109,7 @@ function RoleContent({ role }: { role: RoleKey }) {
           </div>
         }
       >
-        <TabletDashboard />
+        <DashboardMockup />
       </ContainerScroll>
 
       <ul
@@ -121,9 +118,12 @@ function RoleContent({ role }: { role: RoleKey }) {
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          gap: '16px 32px',
+          gap: '20px 28px',
           marginTop: '20px',
           padding: 0,
+          maxWidth: '860px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
         }}
       >
         {data.features.map((f) => (
@@ -148,7 +148,7 @@ export default function RoleSection({ persona }: { persona: Persona }) {
     <section
       ref={sectionRef}
       id="roles"
-      style={{ background: 'var(--inverted-bg)', paddingTop: '48px', paddingBottom: '24px', color: 'var(--inverted-text)' }}
+      style={{ background: 'var(--inverted-bg)', paddingTop: '48px', paddingBottom: '72px', color: 'var(--inverted-text)' }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
         {/* Section header — only shown in "all" mode. Single persona gets title from ContainerScroll */}
@@ -207,7 +207,7 @@ export default function RoleSection({ persona }: { persona: Persona }) {
                   cursor: 'pointer',
                   paddingBottom: '12px',
                   borderBottom: activeTab === tab ? '2px solid var(--brand-bright)' : '2px solid transparent',
-                  transition: 'all 0.2s',
+                  transition: 'all var(--ds-dur-2) var(--ds-ease-standard)',
                 }}
               >
                 {roleData[tab].label}

@@ -210,7 +210,7 @@ function AuditTrail() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       {steps.map((s, i) => (
         <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <CheckCircle2 size={14} color={i < 2 ? '#22c55e' : 'var(--border)'} />
+          <CheckCircle2 size={14} color={i < 2 ? 'var(--ds-success)' : 'var(--border)'} />
           <span style={{ fontSize: 12, color: i < 2 ? 'var(--text-primary)' : 'var(--text-muted)', fontWeight: i < 2 ? 500 : 400 }}>{s}</span>
         </div>
       ))}

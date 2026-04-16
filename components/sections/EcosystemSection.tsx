@@ -139,7 +139,7 @@ export default function EcosystemSection({ persona }: { persona: Persona }) {
                   border: '1px solid var(--border)',
                   borderRadius: '16px',
                   padding: '28px 24px',
-                  transition: 'border-color 0.3s',
+                  transition: 'border-color var(--ds-dur-3) var(--ds-ease-standard)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--text-muted)'

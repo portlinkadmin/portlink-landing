@@ -51,8 +51,8 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           className="reveal"
           style={{
             display: 'inline-block',
-            background: 'rgba(31,177,199,0.12)',
-            border: '1px solid rgba(31,177,199,0.35)',
+            background: 'var(--ds-primary-faint)',
+            border: '1px solid var(--ds-border-1)',
             color: 'var(--text-muted)',
             fontSize: '12px',
             textTransform: 'uppercase',
@@ -112,7 +112,7 @@ export default function PilotSection({ persona }: { persona: Persona }) {
                   borderRadius: '16px',
                   padding: '36px 28px',
                   textAlign: 'left',
-                  transition: 'border-color 0.3s',
+                  transition: 'border-color var(--ds-dur-3) var(--ds-ease-standard)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--text-muted)'
@@ -141,13 +141,13 @@ export default function PilotSection({ persona }: { persona: Persona }) {
           style={{
             display: 'inline-block',
             background: 'var(--brand)',
-            color: 'var(--bg)',
+            color: 'var(--ds-primary-ink)',
             padding: '16px 40px',
             borderRadius: '9999px',
             fontWeight: 600,
             fontSize: '16px',
             textDecoration: 'none',
-            transition: 'background 0.2s',
+            transition: 'background var(--ds-dur-2) var(--ds-ease-standard)',
           }}
           onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}

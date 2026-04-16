@@ -126,13 +126,13 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
             }}
             style={{
               background: 'var(--brand)',
-              color: '#ffffff',
+              color: 'var(--ds-primary-ink)',
               padding: '12px 28px',
               borderRadius: '9999px',
               fontWeight: 600,
               fontSize: '15px',
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'background var(--ds-dur-2) var(--ds-ease-standard)',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
@@ -154,7 +154,7 @@ export default function HeroSection({ persona, theme }: HeroSectionProps) {
               fontSize: '15px',
               textDecoration: 'none',
               background: 'transparent',
-              transition: 'border-color 0.2s',
+              transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = 'var(--text-primary)'

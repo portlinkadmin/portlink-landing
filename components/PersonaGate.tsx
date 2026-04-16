@@ -113,12 +113,12 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
                 alignItems: 'center',
                 textAlign: 'center',
                 fontFamily: 'inherit',
-                transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s',
+                transition: 'transform var(--ds-dur-2) var(--ds-ease-standard), box-shadow var(--ds-dur-2) var(--ds-ease-standard), border-color var(--ds-dur-2) var(--ds-ease-standard)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-3px)'
                 e.currentTarget.style.borderColor = 'var(--brand)'
-                e.currentTarget.style.boxShadow = '0 0 24px rgba(26, 94, 107, 0.12)'
+                e.currentTarget.style.boxShadow = '0 0 24px var(--ds-primary-faint)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'none'
@@ -168,7 +168,7 @@ export default function PersonaGate({ onSelect }: PersonaGateProps) {
           cursor: 'pointer',
           padding: '8px 16px',
           fontFamily: 'inherit',
-          transition: 'color 0.2s',
+          transition: 'color var(--ds-dur-2) var(--ds-ease-standard)',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--brand)')}
         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}

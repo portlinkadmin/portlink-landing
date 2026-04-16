@@ -65,7 +65,7 @@ const inputBase: React.CSSProperties = {
   fontSize: '15px',
   fontFamily: 'inherit',
   outline: 'none',
-  transition: 'border-color 0.2s, box-shadow 0.2s',
+  transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard), box-shadow var(--ds-dur-2) var(--ds-ease-standard)',
   boxSizing: 'border-box',
 }
 
@@ -124,7 +124,7 @@ export default function AccessSection() {
 
   const focusStyle = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.currentTarget.style.borderColor = 'var(--brand)'
-    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(26, 94, 107, 0.12)'
+    e.currentTarget.style.boxShadow = '0 0 0 3px var(--ds-primary-faint)'
   }
   const blurStyle = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.currentTarget.style.borderColor = 'var(--border)'
@@ -158,10 +158,10 @@ export default function AccessSection() {
             fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700,
             color: 'var(--text-primary)', margin: '14px 0 16px',
           }}>
-            We are selective about our first cohort.
+            Founding cohort — onboarding now.
           </h2>
           <p style={{ fontSize: '17px', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '48px', maxWidth: '560px', margin: '0 auto 48px' }}>
-            We are not taking everyone. The first group will shape what Portlink becomes, so we are looking for teams with complex operations, a low tolerance for manual work, and opinions about what is broken.
+            The first group will shape what Portlink becomes, so we work with a small number of teams at a time. Best fit: complex operations, a low tolerance for manual work, and strong opinions about what is broken.
           </p>
           <div style={{
             display: 'grid',
@@ -295,7 +295,7 @@ export default function AccessSection() {
                               cursor: 'pointer',
                               textAlign: 'left',
                               fontFamily: 'inherit',
-                              transition: 'border-color 0.18s, background 0.18s',
+                              transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard), background var(--ds-dur-2) var(--ds-ease-standard)',
                               width: '100%',
                             }}
                             onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.borderColor = 'var(--brand)' }}
@@ -372,16 +372,16 @@ export default function AccessSection() {
                         background: 'transparent', border: '1px solid var(--border)',
                         color: 'var(--text-secondary)', borderRadius: 9999,
                         padding: '12px 20px', cursor: 'pointer', fontFamily: 'inherit',
-                        fontSize: 14, fontWeight: 500, transition: 'border-color 0.2s',
+                        fontSize: 14, fontWeight: 500, transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard)',
                       }}>
                         <ChevronLeft size={15} /> Back
                       </button>
                       <button type="submit" style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        background: 'var(--brand)', color: 'var(--bg)',
+                        background: 'var(--brand)', color: 'var(--ds-primary-ink)',
                         borderRadius: 9999, padding: '12px 24px',
                         fontWeight: 600, fontSize: 15, border: 'none',
-                        cursor: 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
+                        cursor: 'pointer', fontFamily: 'inherit', transition: 'background var(--ds-dur-2) var(--ds-ease-standard)',
                       }}
                         onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
                         onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
@@ -502,17 +502,17 @@ export default function AccessSection() {
                         background: 'transparent', border: '1px solid var(--border)',
                         color: 'var(--text-secondary)', borderRadius: 9999,
                         padding: '12px 20px', cursor: 'pointer', fontFamily: 'inherit',
-                        fontSize: 14, fontWeight: 500, transition: 'border-color 0.2s',
+                        fontSize: 14, fontWeight: 500, transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard)',
                         opacity: submitting ? 0.5 : 1,
                       }}>
                         <ChevronLeft size={15} /> Back
                       </button>
                       <button type="submit" disabled={submitting} style={{
                         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        background: 'var(--brand)', color: 'var(--bg)',
+                        background: 'var(--brand)', color: 'var(--ds-primary-ink)',
                         borderRadius: 9999, padding: '12px 24px',
                         fontWeight: 600, fontSize: 15, border: 'none',
-                        cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background 0.2s',
+                        cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background var(--ds-dur-2) var(--ds-ease-standard)',
                         opacity: submitting ? 0.7 : 1,
                       }}
                         onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--brand-bright)' }}

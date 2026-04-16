@@ -75,7 +75,7 @@ export default function Nav({ theme, setTheme }: NavProps) {
                 textDecoration: 'none',
                 fontSize: '14px',
                 fontWeight: 500,
-                transition: 'color 0.2s',
+                transition: 'color var(--ds-dur-2) var(--ds-ease-standard)',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
@@ -101,7 +101,7 @@ export default function Nav({ theme, setTheme }: NavProps) {
               background: 'transparent',
               color: 'var(--text-secondary)',
               cursor: 'pointer',
-              transition: 'border-color 0.2s, color 0.2s',
+              transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard), color var(--ds-dur-2) var(--ds-ease-standard)',
             }}
           >
             {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
@@ -113,13 +113,13 @@ export default function Nav({ theme, setTheme }: NavProps) {
             className="nav-cta-desktop"
             style={{
               background: 'var(--brand)',
-              color: '#ffffff',
+              color: 'var(--ds-primary-ink)',
               padding: '8px 20px',
               borderRadius: '9999px',
               fontSize: '14px',
               fontWeight: 600,
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'background var(--ds-dur-2) var(--ds-ease-standard)',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--brand-bright)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--brand)')}
@@ -180,7 +180,7 @@ export default function Nav({ theme, setTheme }: NavProps) {
               display: 'inline-block',
               marginTop: '16px',
               background: 'var(--brand)',
-              color: '#ffffff',
+              color: 'var(--ds-primary-ink)',
               padding: '10px 24px',
               borderRadius: '9999px',
               fontSize: '14px',

@@ -47,7 +47,7 @@ export function BentoCard({ title, description, visual, span = 'half', accent = 
         gap: '16px',
         position: 'relative',
         overflow: 'hidden',
-        transition: 'border-color 0.25s, box-shadow 0.25s',
+        transition: 'border-color var(--ds-dur-2) var(--ds-ease-standard), box-shadow var(--ds-dur-2) var(--ds-ease-standard)',
         cursor: 'default',
       }}
     >
