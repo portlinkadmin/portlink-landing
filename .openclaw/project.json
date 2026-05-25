@@ -1,0 +1,14 @@
+{
+  "schema": "openclaw.project.v1",
+  "project_id": "portlink-portlink-landing",
+  "canonical_name": "portlink / portlink-landing",
+  "registry_path": "/Users/nyx/.openclaw/workspace-nyx/shared/PROJECT-REGISTRY.md",
+  "mission_control": {
+    "enabled": true,
+    "project_ref": "portlink-portlink-landing"
+  },
+  "agents": {
+    "owner": "nyx",
+    "support": []
+  }
+}
