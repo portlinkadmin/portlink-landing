@@ -189,7 +189,7 @@ export default function DashboardMockup() {
           pointerEvents: 'none',
         }}>
           <span style={{ fontSize: 32, fontWeight: 700, color: 'var(--ds-accent-strong)', letterSpacing: '-0.02em' }}>
-            Coming 1st of June
+            Coming soon
           </span>
         </div>
       </div>
